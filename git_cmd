@@ -1,0 +1,30 @@
+--------------------------------------------------------------------------------------------------------------------	
+						GIT COMMANDS
+--------------------------------------------------------------------------------------------------------------------
+
+
+git config --global user.name "username"
+git config --global user.email "email"
+git config -h
+
+// setting default editor of git
+git config --global core.editor "geany"
+
+// open geany editor
+git config --global --edit 
+
+
+git config --global core.autocrlf input [for MAC/Linux]
+
+ls -al	
+rm -rf directory name [remove directory]
+
+touch abc.txt
+git add .
+git commit -m "commit message"
+git status
+git remote add origin "URL" [only one time we have to do]
+git push -u origin main
+
+git log -p OR git log 
+
