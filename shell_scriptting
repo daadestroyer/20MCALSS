@@ -1,0 +1,61 @@
+Shell interpreter cycle
+-----------------------
+when a user logged in , when a command is given what happen , when a user is logged out what happen called shell interpreter cycle
+
+--> sudo login
+    give username and password
+--> ps
+--> ps -aux | grep bash
+--> ps -aux
+--> mkdir shellscriptting
+--> touch chap chap 01 chap02 chap03
+--> ls chap* [* character matches any no of character after that particular string]
+--> ls -x chap*
+--> echo * [just like a ls command]
+--> man echo [you can see description of this command]
+--> touch chap001 chap15 chap x chapy
+--> touch chapxy chapyz
+--> ls chap* [one or more]
+--> ls chap? [display file whoose file name having 1 digit only]
+--> ls chap??[display file whoose file name having 2 digit only] 
+--> ls chap??? [3 digit only]
+--> ls chap???? [4 digit only]
+[* matches any no of character including none]
+--> mkdir chapters
+--> cd chapters
+
+copy those file whoose length is having 6 
+--> cp ?????? chapters [move those file whose having length 6 in chapters folder]
+--> cd ..
+--> ls chap[123] --> display those file whose name including 1 , 2 , 3
+--> ls chap[xyz] --> display those file whose name including x , y , x
+--> ls chap[!x]  --> display those file whose name doesn't contain x character
+--> ls chap[!xy] --> display those file whose name doesn't contain x,y character
+--> ls chap0[!12] --> it will display chap03 file and not chap01 and chap02
+--> ls chap0[1-4]
+--> touch chap 04
+--> ls chap0[1-4]
+--> ls chap0[2-3] --> negate all those file whose start 02 to 03
+display --> chap01 chap02
+
+Q. Compress all file begining with .(dot) comma followed by one or more character then a second dot followed by
+   one or more characters
+   
+   
+--> sudo apt-get install ncompress
+man compress
+	
+compress .?*.?*
+
+remove files chap00 chap01 chap....chap15
+--> rm chap[0-1][0-5] [remove all those files whose first digit range from 0 to 1 and second character range from 1 to 5]
+
+--> touch abc.o abc.o xyz.o
+--> sudo apt-get install gcc
+--> nano a12.c
+--> write something in file
+--> ctrl + x
+--> after that run output file ./a.out
+--> gcc a12.c -o mca
+--> ./mca
+--> man lp [to print files]
