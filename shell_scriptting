@@ -59,3 +59,61 @@ remove files chap00 chap01 chap....chap15
 --> gcc a12.c -o mca
 --> ./mca
 --> man lp [to print files]
+--> cd ..
+--> ls .??*
+
+
+Escaping and Quoting:-
+---------------------
+echo \\ 
+echo \
+echo \|\<\>\'\"
+OUPTUT -> |<>'"
+
+echo '*?[8-9]'
+*?[8-9]
+
+echo a b   c   d
+
+
+
+
+Redirection
+---------
+stream is just a sequence of bytes
+
+3 types of streams
+------------------
+a) stndrd inpt
+b) stndrd error
+c) stndrd otpt
+
+
+>> stnd file not assoctd with any phy file
+>> shell will decide inpt strm , otpt strm , error strm
+
+command which use standard o/p and dont read standrd i/p ?
+> ls , pwd , who
+
+command which read standard i/p but wont use standrd o/p ?
+>> lp[printng files]
+
+command neither use standard i/	p but wont use standrd o/p ?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
