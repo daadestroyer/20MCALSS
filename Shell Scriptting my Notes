@@ -1,0 +1,106 @@
+How to view content of the file
+-------------------------------
+We can view content of the file by using the following commands:
+1. cat
+2. tac
+3. rev
+4. head
+5. tail
+6. more 
+7. less
+
+1. cat
+------
+cat filename.extension
+cat abc.text
+cat -n abc.txt [to get the line no.s also]
+cat -b abc.txt [to remove blank lines]
+cat -nb abc.txt [to remove blank lines and blank spaces]
+cat file1 file2 file3 file4 file5 [to view multiple files content simultaneously]
+cat -n file1 file2 file3 [get the line no.s of all files]
+
+create a new file with some content
+-----------------------------------
+cat > filename
+---write something on file---
+---write something on file---
+ctrl+d to save file
+
+to append some extra data to an existing file
+---------------------------------------------
+cat >> filename
+---some more data---
+---some more data---
+
+to copy content of one file to another file
+-------------------------------------------
+cp file1 file2
+cat file1 > file2
+
+to append one file content to another file content
+--------------------------------------------------
+cat file1 >> file2
+
+to copy content of multiple file to a single file
+-------------------------------------------------
+file1 file2 file3 file4 file5 > total.txt
+
+to append content of multiple file to a single file
+-------------------------------------------------
+file1 file2 file3 file4 file5 >> total.txt
+
+
+2. tac[vertical reversal]
+-------
+It is reverse of cat command means display content in reverse form
+here total content will reverse but line not reverse 
+cat filename
+
+3. rev[horizontal reversal]
+------
+rev means reversal
+here each line will be reversal 
+
+
+cat command is best suitable for small files but if large files are there then we should go for head,tail,more,less
+
+4. head
+-------
+to view specified no of files from top of the file
+head -<any number> filename [display only top 5 lines]
+head -n -5 filename [it will display all lines from top except last 5 lines]
+head -c 100 filename [display first 100 character of the file]
+
+
+5. tail
+-------
+to view specified no of files from bottom of the file
+head -<any number> filename [display only top 5 lines]
+head -n -5 filename [it will display last 5 lines]
+head -c 100 filename [display first 100 character of the file]
+
+
+
+Word Count Command(wc command)
+------------------------------
+We can count no of words along with that we can count no of lines and no of character present in the given file
+
+
+wc filename
+	no_of_lines , no_of_words , no_of_characters , filename
+	
+wc a.txt
+	6  24 206 a.txt
+
+6 -> no of lines
+24 -> no of words
+206 -> no of characters
+
+wc -l filename  [get no of lines]
+wc -w filename  [get no of words]
+wc -c filename  [get no of characters]
+wc -wc filename [get no of word and character]
+wc -lc filename [get no of line and character]
+
+
+Redirection
