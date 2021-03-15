@@ -105,12 +105,25 @@ wc -lc filename [get no of line and character]
 
 Redirection
 -----------
+Redirection is a feature in Linux such that when executing a command, you can change the standard input/output devices. The basic workflow of any Linux command is that it takes an input and give an output.
+
+>>> The standard input (stdin) device is the keyboard.
+>>> The standard output (stdout) device is the screen.
+With redirection, the above standard input/output can be changed.
+
 Standard Input,Standard Output ,Standard Error are data streams and can flow from one place to another place . We can
 can redirect these streams
 
+File				File Descriptor
+-------------------------------------------------
+Standard Input STDIN	   	       0
+Standard Output STDOUT		       1
+Standard Error STDERR		       2
+
+
 1. Redirection Standard Output
 ------------------------------
->> Standard OP is associated with 1 (0 means standard IP , 1 means standard OP , 2 means stand ard error)
+>> Standard OP is associated with 1 (0 means standard IP , 1 means standard OP , 2 means standard error)
 >> Standard OP connected with terminal
 >> By default standard OP connected with terminal but we can redirect this standard OP from terminal to some where else
    based on our req
@@ -126,7 +139,7 @@ Eg. to redirect standard OP to cat command from terminal to output.txt
 $ cat 1 > output.txt[perform overwriting in file]
 $ cat 1 >> output.txt[perform appending of data in file]
 
-
+	
 >> by default > and >> is always meant for ouput redirection only 
 >> for using > or >> we don't need to use 1 always it is optional
 
@@ -145,3 +158,31 @@ cal 1234
 >> by executing this don't display this error terminal just redirect this error to error.txt
 >> in redirection output taking no in command cat 1 > filename [here taking 1 is not compl..]
 >> but in redirecting error taking no is compl... cal dfdfdfdf 2>> error.txt
+
+3. Redirection standard input
+-----------------------------
+>> By default standard ip device is connected with keyboard. but we can redirect from keyboard to somewhere else  
+   based on our requirement
+
+>> Standard IP stream associated with 0
+>> We can perform input redirection by using < symbol
+
+$ cat 0< a.txt
+
+>> this command is taking input from the a.txt insteam from keyboard[standard input] , it will display OP to standard 
+   OP device 
+>> here 0 is not compl...
+
+Read IP from a.txt and send that OP to output.txt
+-------------------------------------------------
+cat 0< a.txt 1> output.txt
+cat < a.txt > output.txt
+
+cat < a.txt >> output.txt
+
+
+
+
+
+Piping Concept
+-------------
