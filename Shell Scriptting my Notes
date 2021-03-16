@@ -268,3 +268,164 @@ xargs command:
 cat input.txt | xargs rm
 
 NOTE: in piping next command won't accept stream if it won't accept stram convert it into CMD line args using xargs
+
+
+>> By using wildcard character we can build regular expression
+>> A wildcard character can be used as a substitute for required sequence of characters in regular expression
+
+* --> represent zero or more character i.e any no of characters
+? --> represent only one character
+[] --> represent range of characters
+[abc] --> a or b or c
+[!abc] --> except a,b,c
+[a-z] --> from small a to small z
+[A-Z] --> from capital A to capital Z
+[a-zA-Z] --> any upper/lower case character
+[0-9] --> any digit from 0 to 9
+[a-zA-Z0-9] --> any alpha numeric character
+[!a-zA-Z0-9] --> except any alpha numeric character means special characters
+
+
+[[:lower:]] --> any lower case alphabet symbol
+[[:upper:]] --> any upper case alphabet symbol
+[[:alpha:]] --> any alphabet symbol
+[[:digit:]] --> any digit from 0-9
+[[:alnum:]] --> any digit from 0-9
+[![:digit:]] --> any character except digit
+{} --> list of all files with comma seperator
+
+
+To list all files
+-----------------
+1. ls
+
+To list all files with some extension
+------------------------------------
+ls *.* 
+
+To list all files with .java or .txt extension
+---------------------------------------
+ls *.java
+ls *.txt
+
+To list all files whoose length is 3 
+------------------------------------
+ls ?? [display all files whoose length is 2]
+ls ??? [display all files whoose length is 3]
+ls ???? [display all files whoose length is 4]
+ls ????? [display all files whoose length is 5]
+
+1. To list all where filename first character is start with a or b or c
+----------------------------------------------------------------
+ls [abc]*
+
+2. To list all where filename first character is not start with a or b or c
+----------------------------------------------------------------
+ls [!abc]*
+
+
+3. To list all files where file name start with lower case alphabet symbol
+--------------------------------------------------------------------------
+ls [a-z]*
+alternative : [[:lower:]]*
+
+4. To list all files where file name start with upper case alphabet symbol
+--------------------------------------------------------------------------
+ls [A-Z]*
+alternative : [[:upper:]]
+
+5. To list all files whose name start with digit
+----------------------------------------------
+ls [0-9]*
+alternative : ls [[:digit:]]
+
+6. To list out all files where first name should be upper case letter and second letter should be a digit and third 
+   letter should be a lower case alphabet symbol
+---------------------------------------------------------------------------------
+ls [A-Z][0-9][a-z]
+alternative : ls [[:upper:]][[:digit:]][[:lower:]]
+
+7. To list out all files start with special symbol
+---------------------------------------------------
+ls [!A-Za-z0-9]
+alternative : ls [![:a:]]
+
+8. To copy all files starts with digit to dir1 directory
+---------------------------------------------------------
+cp [0-9]* dir1
+
+9. To move all files in dir1 which have speicial names
+-------------------------------------------------------
+mv [[:alpha:]]*.txt dir2
+
+
+10. Remove all fiels start with a or b or c and ends with e or t
+-----------------------------------------------------------------
+rx [abc]*[et]
+
+SORT
+----
+>> sort command sort the file , arranging the records in a particular order
+>> by default the sort command sorts file assuming the content are ASCII
+>> using option in sort command , it can also be used to sort numerically
+
+
+1. Sort in alphabetical order
+-----------------------------
+sort filename.txt
+
+2. Sort on numerical value [option -n]
+----------------------------------------
+sort filename.txt
+
+3. Sort in reverse order [option -r]
+------------------------------------
+sort -r filename.txt 
+
+4. Save the sorted results to another file
+---------------------------------------
+sort -n filename.txt  > filename_sorted.txt
+
+5. Sort Specific Column [option -k]
+----------------------------------
+sort -t "|" +0 emp1.lst [sort the 0th col of file]
+sort -t "|" +1 emp1.lst [sort the 1st col of file]
+sort -t "|" +2 emp1.lst [sort the 2nd col of file]
+sort -t "|" +5 -n emp1.lst [sort the numeric coloum]
+
+6. reverse the 5th numeric col in file in desc oreder
+-------------------------------------------
+sort -t "|" -r -n +5 emp1.lst
+
+7. rev the 1st col of file in desc order
+----------------------------------------
+sort -t "|" -r +1 emp1.lst
+
+8. rev the 2nd col of file in asc order
+-----------------------------------------
+sort -t "|" +2r emp1.lst
+
+9. start sort from 2nd char of 1st col till goes on 1 col of 4th char
+-------------------------------------------------------------------
+sort -t "|" +1.2 -1.4 emp1.lst
+
+
+CUT COMMAND
+-----------
+1. cut and display the 3rd col of file
+-------------------------------------
+cut -d "|" -f3 emp1.lst
+
+
+FILTERS
+GREP COMMAND
+REGULAR AND EXTENDED REGULAR EXPRESSION
+EGREP 
+SED
+ |-> Line addressing
+ |-> Context addressing
+ |-> Text addressing
+ |-> Substitution
+
+
+
