@@ -186,3 +186,85 @@ cat < a.txt >> output.txt
 
 Piping Concept
 -------------
+>> for the command in how many ways we can provide input : cm1 arguement or from standard ip
+>> By using piping , multiple commands will work together to fulfill our requirement .
+>> We can implement piping concept using | command 
+
+ls -l | wc-l
+
+here standard OP of ls command become standard IP for wc command
+
+ls -l /etc | wc
+ls -l /etc | head -10 [getting 10 lines from top]
+ls -l /etc | wc | wc -l
+
+
+
+Requirement:
+------------
+the op of LS command should be saved to file output.txt and should be provided to as input to wc command ?
+
+ls -l > output.txt | wc -l
+ls -l >> output.txt c -;
+
+In the middle of piping if i use redirection then it breaks pipinf concept
+
+
+
+Tee Pipe OR T-Junction
+----------------------
+In piping if we want to save the OP of one command to afilwaand if we wanr to send one command to a file and if we want
+to pass that OP to next command simul.. then we use tee command  		
+
+ls -l | tee output.txt | wc 
+
+
+Eg. to save output of ls command to a file and display to the terminal simultaenously 
+
+ls -l > output.txt [it will save output of ls to output.txt but won't display it]
+ls -l | tee output.txt [get output from ls and save that into output.txt and provide input to next command but next 
+                       command is not there so it will display the output to the terminal]
+
+
+Eg. If i want to save the result of ls -l in output.txt and pass the output to wc command and save that output in     
+    wc.txt
+    
+ls -l | tee output.txt | wc > wc.txt [ls output will save to output.txt and wc output was save to wc.txt]
+ls -l | tee output.txt | wc | tee wc.txt [save to the file and display to the terminal also]
+
+NOTE : if we use ls -l | tee output.txt | wc > wc.txt [then it will display the op also	]
+
+
+
+
+
+Req - 2:
+--------
+Assumes input.txt contains filenames
+
+
+input.txt
+---------
+file1.txt
+file2.txt
+file3.txt
+file4.txt
+
+Read file names from input.txt and remove each file?
+
+
+cat input.txt ==> Standard Output
+rm file1.txt file2.txt file3.txt ==> remove 3 files
+
+remove command always expecting from CMD line args only
+but in piping the input is always in stream
+
+cat input.txt | rm
+> we have to convert that stream into CMD line args
+
+xargs command:
+--------------
+
+cat input.txt | xargs rm
+
+NOTE: in piping next command won't accept stream if it won't accept stram convert it into CMD line args using xargs
