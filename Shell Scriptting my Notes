@@ -413,13 +413,102 @@ sort -t "|" +1.2 -1.4 emp1.lst
 CUT COMMAND
 -----------
 1. cut and display the 3rd col of file
--------------------------------------
+--------------------------------------
 cut -d "|" -f3 emp1.lst
 
 
 FILTERS
+---------
+1. head
+2. tail
+3. cut
+4. paste
+5. sort
+6. tr
+7. tee
+8. sed
+9. grep
+10. fgrep
+11. egrep
+
+
 GREP COMMAND
-REGULAR AND EXTENDED REGULAR EXPRESSION
+-------------
+grep commands and various options
+
+search single content in file
+-----------------------------
+grep 'linux' demo.txt [search linux in demo.txt]
+
+search multiple content in the file
+-----------------------------------
+we have to use -e option which is extended
+
+-e --> to search multiple word in a file
+-c --> get the count value of particular word in a file
+-i --> to search for both capital and small word
+
+searching particular word
+--------------------------
+grep -e 'java' -e 'linux' demo.txt [searching for java and linux]
+
+search multiple word in a file
+-------------------------------
+grep -e 'director' -e 'sales' emp1.lst
+
+get the count value of particular word in a file
+-----------------------------------------------
+grep -c 'director' emp1.lst
+
+list all files which are having this particular word
+----------------------------------------------------
+grep -l 'sales' *.lst [list all file which're having sales word]
+
+O/P:
+dept.lst
+emp1.lst
+emp.lst
+
+display file data excluding some word
+------------------------------------
+grep -v 'sales' emp1.lst
+
+
+grep wo[od][de]house emp.lst
+
+grep "true*man" emp.lst [print all those names which are having man in word before that anything can be allow]
+
+O/P: trueman
+     truman
+   
+grep wilco[cx*]k*s* emp
+
+NOTE : we use -e option to search multiple word in a file , but we can also use egrep command also which is extended grep 
+
+egrep 'java|linux' demo.txt [search java or linux in demo.txt]
+
+search for woodcock | woodhouse | wodehouse
+--------------------------------------------
+egrep 'wo(o|d)(d|e)(house|cock)' emp.lst 
+
+search for capital and small both
+-----------------------------------
+egrep -i 'wo(o|d)(d|e)(house|cock)' emp.lst
+
+
+grep command always look for the match : "(java|linux)"
+grep command can understand patter or not --> yes but not all patterns
+
+grep 'linux' emp.lst [can understand by grep]
+grep 'linux|java' emp.lst [can't understand by grep can be understand by egrep]
+
+egrep command can understand all patterns
+like : 
+
+>> '^linux' can understand by egrep
+>> '(java|linux)' can understand by egrep
+ 
+
 EGREP 
 SED
  |-> Line addressing
