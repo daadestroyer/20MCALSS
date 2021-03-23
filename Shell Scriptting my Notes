@@ -75,9 +75,9 @@ head -c 100 filename [display first 100 character of the file]
 5. tail
 -------
 to view specified no of files from bottom of the file
-head -<any number> filename [display only top 5 lines]
-head -n -5 filename [it will display last 5 lines]
-head -c 100 filename [display first 100 character of the file]
+tail -<any number> filename [display only top 5 lines]
+tail -n -5 filename [it will display last 5 lines]
+tail	d -c 100 filename [display first 100 character of the file]
 
 
 
@@ -358,7 +358,6 @@ cp [0-9]* dir1
 -------------------------------------------------------
 mv [[:alpha:]]*.txt dir2
 
-
 10. Remove all fiels start with a or b or c and ends with e or t
 -----------------------------------------------------------------
 rx [abc]*[et]
@@ -407,11 +406,21 @@ sort -t "|" +2r emp1.lst
 
 9. start sort from 2nd char of 1st col till goes on 1 col of 4th char
 -------------------------------------------------------------------
-sort -t "|" +1.2 -1.4 emp1.lst
+sort -t "|" +1.2 - 1.4 emp1.lst
 
 
 CUT COMMAND
 -----------
+we use cut command to extract data from file
+file can be normal or tabular file
+suppose if it is normal file
+
+
+first line
+second line
+third line
+
+
 1. cut and display the 3rd col of file
 --------------------------------------
 cut -d "|" -f3 emp1.lst
@@ -424,7 +433,7 @@ FILTERS
 3. cut
 4. paste
 5. sort
-6. tr
+6. tr [tr 'a' 'A' < emp.lst] use for replacing
 7. tee
 8. sed
 9. grep
@@ -509,8 +518,94 @@ like :
 >> '(java|linux)' can understand by egrep
  
 
-EGREP 
+grep command with -F option:	
+-----------------------------
+-F means fixed string
+if we want to search a group of fixed string then we should have to go for -F option
+
+grep -F "java	
+linux 
+python " demo.txt
+
+grep -e 'java' -e'python' -e'linux' demo.txt
+
+
+instead of -F we can use fgrep command
+
+
+fgrep means ---> fixed string global regular expression print 
+fgrep "java
+linux
+python" demo.txt
+
+
+fgrep command can understand pattern ?
+--------------------------------------
+no we've to provide only fixed string .
+if we provide like this fgrep "java|python" demo.txt then fgrep didn't understand that java or python is regular 
+expression
+
+
+
+grep vs egrep vs fgrep
+------------------------
+1. grep command can understand but not all patterns
+   like this grep can undestand this pattern grep ja.. demo.txt [to display all string start with ja]
+   but grep can't understand this grep "java|python" demo.txt [to search either java or python string]
+   
+2. extended grep (egrep) can understand all patterns
+3. fixed string grep can't understand any patter , it can accept only fixed string
+
+NOTE:
+egrep is not powerfull
+fgrep was too good in performance wise
+fgrep means fast grep
+
+
+If we want to search some keyword which was present in file 1 and we want to search all those keyword in file2
+---------------------------------------------------------------------------------------------------------------
+keyword.txt
+----------------
+java
+python
+linux
+
+grep.txt
+--------
+java
+java is good
+j2se
+j2ee
+j2me
+
+linux is created by linus torvalds
+python created by guido van rossum
+java is created by james gosling
+c was created by dennis ritchie
+c++ was created by bjarne stroutsrup
+
+
+fgrep -f file1 file2
+fgrep -f keyword.txt grep.txt
+
+O/P: java
+     java 
+     linux 
+     python 
+     java 
+     
+     
+egrep ==> grep -e[this is recommended to use]
+fgrep ==> grep -F[this is recommended to use]
+
+
 SED
+----
+sed '3q' filename [print 3rd col]
+sed '3,6p' filename [print from 3 to 6th col]
+sed '3,$p' filename 
+
+
  |-> Line addressing
  |-> Context addressing
  |-> Text addressing
