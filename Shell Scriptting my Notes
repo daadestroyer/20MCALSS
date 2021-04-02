@@ -456,7 +456,56 @@ touch lss{1.100}.txt
 Q. create 5 directory named with dir1 , dir2 , dir3 , dir4 and dir5 . In these directories create empty files named
    with a.txt , b.txt , c.txt
    
-mkdir -p dir{1..5}/{a.txt,b.txt,c.txt}   
+mkdir -p dir{1..5}/{a.txt,b.txt,c.txt}  
+
+
+
+Assume we're in /home/durga
+---------------------------
+./scripts/test.sh ===> Relative Path
+scripts/test.sh   ===> Relative Path
+
+/home/durga/scripts/test.sh ===> Absolute Path 
+
+Absoulte Path
+-------------
+It is the path start from root(/) to destination ie. it is complete path
+Absolute path means start from root
+
+
+Relative Path
+-------------
+It is the path from current working directory to destination
+Relative Path means start from current location
+ 
+mkdir -p x/x1/x1{1,2} x/x2 y/y1/y1{1,2} y/y2
+
+x
+├── x1
+│   ├── x11
+│   └── x12
+└── x2
+y
+├── y1
+│   ├── y11
+│   └── y12
+└── y2
+
+Assume we're in x11 directory how to go y2 directory ?
+------------------------------------------------------
+Absolute Path(start from root)
+-------------------------------
+cd /home/daadestroyer/Desktop/y/y2
+OR
+cd ~/Desktop/y/y2
+
+Relative Path(start from current location)
+-----------------------------------------
+/home/daadestroyer/Desktop/x/x1/x11
+
+cd ./../../.. (till here we come to desktop)
+cd ./../../../y/y2 
+ 
 1. cat
 ------
 cat filename.extension
@@ -1215,7 +1264,6 @@ sed '/^$/d;G' line.txt
 ^$ --> is used for deleting all blank spaces
 /d is used for display 
 G is used for Gap/Blanks
-
 
 
 
