@@ -1,6 +1,261 @@
-How to view content of the file
--------------------------------
+UNIX/LINUX
+----------
+Java developer
+Python
+Devops ===> Linux
+Hadoop ===> Linux
+Tester ===> Linux
+Developer ===> Linux
+
+90% of real time application ===> Linux Platform
+
+Topic-1: Overview of UNIX/LINUX OS
+Topic-2: Linux File System
+Topic-3: Linux Installation
+Topic-4: ls ,date,cal command
+Topic-5: Working with directories
+Topic-6: Working with files
+Topic-7: Comparing Files
+Topic-8: Creation of links
+Topic-9: Word Cound (WC Command)
+Topic-10: Sorting content of the file
+Topic-11: Find unique content in the file by using uniq command
+Topic-12: Input/Output redirection
+Topic-13: Piping
+Topic-14: How to use multiple commands in a single file
+Topic-15: Regular Exression and wild card characters
+Topic-16: Command Alisaing 
+Topic-17: Locate and Find Command
+Topic-18: Compression and Uncompression of files (tar,gzip,gunzip,bzip2,bunzip2)
+Topic-19: Grep Command
+Topic-20: Cut Command
+Topic-21: File Permission
+Topic-22: Working with editors
+Topic-23: Shell Scriptting and Shell Programming
+Topic-24: What is shell script and , sha-bang and first script
+Shell Variables
+Variable substitution and command substitution
+Command Line Arguements
+How to read dynamic data from the user
+Operators
+Control Statements
+Arrays
+Shell script functions
+Project on shell scriptting 
+Stream Editor(SED)
+AWK Programming 
+Project on AWK Programming
+
+Linux Administration Basics
+---------------------------
+Job Scheduling with crontab
+User Mangement 
+Working with putty,Mobaxterm,XShell
+How to customize open source software code
+Process Management
+Communication Commands (write,wall,msg,mail)
+
+
+How to use gmail from ubuntu terminal to send email
+Package Management
+Install and Working with MYSQL Database
+Working with Java
+Job Control
+nohup command
+at command
+Memory related command
+networking commands
+working with winscp
+working with filezilla
+init command 
+topmost important linux questions
+
+
+Topic-1: Overview of UNIX/LINUX OS
+==================================
+>> It is an OS created in 1960s
+>> With lot of extensions and improvements to base version , several flavours introduced by organization / companies
+	(RedHat,Linux,Ubuntu)
+>> Secure than windows OS
+>> 
+
+Charactersticks
+---------------
+1. It is freeware
+2. Open source software
+   FOSS (freeware and open source software)
+date command ==> Linux 
+
+3. Multiuser OS
+4. Multitasking OS
+5. Support both cui and gui 
+	
+CUI is more powerfull than GUI because creating 40 directory using GUI is very time taking process but in CUI
+it is a work of 3 second
+
+mkdir dir{1..50}
+create 100 files in every directory touch dir{1..50}/filename {1..100}
+ 
+Flavours of UNIX:
+-----------------
+As UNIX is open source OS , multiple flavour are available with lot of extension and improvement
+
+Ubuntu
+RedHat
+Centos
+Fedora
+SlackWare
+Open Solaris
+Kali 
+
+
+
+Components of UNIX:
+-------------------
+1. Shell
+----------
+>> It is the outer layer of UNIX operating System.
+>> Shell read command provided by user
+>> Shell check it that command is valid command or not
+>> If everything is proper, then shell interprets our command into kernal understandable form and handover to the     
+   kernal. 
+>> Shell acts as interface between user and kernal.
+
+2. Kernel
+-----------
+>> It is the core component of UNIX operating system.
+>> It is responsible to execute our commands.
+>> It is responsible to interact with hardware components.
+>> Memory allocation and processor allocation will takes care by kernal.
+
+
+
+Topic-2: Linux File System
+===========================
+1. In linux everything is treated as file
+
+All files are divided in 3 types
+--------------------------------
+1. Normal Files/Ordinary Files
+----------------
+these files contain data. it can be normal text file or binary files(image,video,files,audio files etc)
+
+abc.txt
+abc.sh
+test.py
+sunny.jpg
+
+2. Directories Files
+--------------------
+1. These files represent directories . In , windows , we can use folder terminology but in linux we can use directory 
+   terminology 
+2. Directory contains files and sub directory also.
+
+3. Device Files
+---------------
+>> In linux every file is represented as a file . By using this file we can communicate with that device.
+>> Even device also treated as file only 
+>> Inside /dev directory all device related file is there
+
+terminal is also represented as ==> file
+
+>>> tty (terminal related file)
+
+
+Terminal-1 ===> /dev/pts/0 	
+Terminal-2 ===> /dev/pts/1
+
+How one terminal communicate with another terminal
+---------------------------------------------------
+echo "I Love Sunny" > /dev/pts/1 (write this command in terminal and open another terminal to see output)
+	
+How to clear one terminal from another terminal
+-----------------------------------------------
+clear > /dev/pts/1
+
+
+How to check file type:
+-----------------------
+In Ubuntu
+---------
+blue color files represent : directories
+remaining : ordinary files
+green color files : executable files
+red color file : link file
+white color file : text file
+
+
+- --> Normal File
+d --> Directory File
+l --> Link File
+c --> Character File
+b --> Block file
+s --> socket file
+
+File System Navigation Commands
+--------------------------------
+pwd --> use to check current working directory 
+cd .. --> will move to the home directory
+cd -- --> 
+
+hidden files and directories
+-----------------------------
+ls -l --> to list down all files with specifi files types and permission also
+ls -a --> to display hidden files , every file contain two hidden files 
+	  (i) first hidden file name is . (dot) mean current directory
+	  (ii) second hidden file name is ..(dot dot) represent parent directory
+	  
+	  
+/home/daadestroyer/Desktop/dir1/dir2
+
+if you are in dir2
+--------------------
+current dir --> dir2
+parent dir --> dir1
+
+1. cd .
+   changes to current directory(useless)
+   
+2. cd ..
+   changes to parent directory
+   
+3. cd ../../..
+
+4. cd ~
+   directly move to user home directory
+   
+5. cd -
+   move to the previous working directory
+   
+  
+Linux File System Hierarchy
+----------------------------
+1. Linux file system has tree like structure
+2. It start with the root (/)
+3. / Is the top most directory
+4. root directory contain several multiple sub directory
+    |-bin 
+    |-etc
+    |-home 
+    |-lib 
+    |-usr 
+    |-dev 
+    |-cdrom
+	
+	
+
+For every user following directories are there 
+----------------------------------------------
+Download , Picture , Documents , Music , Picture , Videos
+
+which touch (to know where this command is present)
+
+1. bin directory:
+-------------
+bin means binary contain binary files  
+inside bin every command binary file(executable files) are present like 
 We can view content of the file by using the following commands:
+
 1. cat
 2. tac
 3. rev
@@ -9,6 +264,199 @@ We can view content of the file by using the following commands:
 6. more 
 7. less
 
+
+2. sbin directory
+-----------------
+sbin means systembin
+
+normal user used command related binary executable files available in bin directory
+super user used commands related  binary executable files available in bin directory
+
+Q. Difference b/w sbin and bin?
+--------------------------------
+bin ==> for normal user executable binary files
+sbin ==> for super user executable binary files
+
+3. etc directory
+-----------------
+contains all system configuration file
+
+whoami
+su -another_user_name
+
+/etc/passwd ==> all user info available in this file
+
+
+4. tmp directory
+------------------
+tmp means temporary.
+if any file or directory required just for temporary purpose in our current session these files will be deleted 
+automatically at the time of system shutdown 
+
+Desktop ==> demo.txt
+tmp ==> a.txt b.txt c.txt
+
+
+-
+rw- (Owner can perform read , write but not execute)
+r-- (Group member perform only read but not write and execute operation) 
+r-- (Other use can perform only read but not write and execute operation)
+
+
+5. dev directory
+-----------------
+dev means devices
+every device in linux is treated as file
+all these device related file will be stored inside dev directory
+by using these files we can communicate with that device
+
+eg.
+--
+tty --> terminal related file
+fd --> floppy drive related file
+hm --> harddisk related file
+ram --> ram related file
+stdin --> standard input device file(keyboard)
+stdout --> standard output device file
+
+
+Topic-4: ls ,date,cal command
+==============================
+1. ls command
+--------------
+>> list out all files and directories present inside given directories.
+>> if we are not providing and directory then it will list out all files of current working directory
+
+ls di1
+ls
+
+2. ls -r
+------------
+ls -r
+it will list all files and directory in reverse of alphanetical order
+
+3. ls -l
+-----------
+display in long listing form
+
+4. ls -t
+-----------
+-t means creation or last modified time
+most of recent will be at the top and old are at bottom  
+
+5. ls -R
+-----------
+-R means recursive
+
+6. ls -s	
+-------------------
+-s mean size
+the number of blocks said
+1 block  = 1k
+
+
+date command
+-------------
+we can use date command to display date
+
+various Options
+---------------
+1. date +%D
+   It will display only date in the form : mm/dd/yy
+  
+2. date +%T 
+   Only hh:mm:ss
+   
+3. date +%d ==> only day value
+   date +%m ==> only month value
+   date +%y ==> only year value in yy form
+   date +%Y ==> only year value in yyyy form
+
+4. date +%H ==> only hours value in 24 hours format
+   date +%M ==> only hours value in 24 hours format
+   date +%S ==> only hours value in 24 hours format
+   
+
+date +%d-%m-%y
+date +%D:%M:%Y
+
+How we can check 2 years back data ? with the help of date command
+------------------------------------------------------------------
+We have to identify 2 years back data
+We have to identify   
+
+
+
+calendar command
+----------------
+cal --> to display current month calendar
+cal 2020 --> to display complete year calendar
+
+
+Topic-5: Working with directories
+=================================
+1. create one directory
+----------------------
+mkdir dir_name
+
+2. create multiple directory
+----------------------------
+mkdir dir1_name dir2_name dir3_name 
+	 
+3. to create directory inside directory
+-----------------------------------------
+mkdir dir1/dir2/dir3
+
+in this case only dir3 will be created .
+but make sure dir1 should be available	 
+
+if you want to create dir0 before dir1 if dir1/dir2/dir3 is already available ? 
+
+dir0/dir1/dir2/
+ 
+mkdir -p
+
+mkdir -p  heroines/{sunny,katrina,kareena,karishma}
+heroines/
+├── kareena
+├── karishma
+├── katrina
+└── sunny
+
+
+mkdir -p  heroines/{sunny,katrina,kareena,karishma}/{jan,feb,mar,apr}
+
+heroines/
+├── kareena
+│   ├── apr
+│   ├── feb
+│   ├── jan
+│   └── mar
+├── karishma
+│   ├── apr
+│   ├── feb
+│   ├── jan
+│   └── mar
+├── katrina
+│   ├── apr
+│   ├── feb
+│   ├── jan
+│   └── mar
+└── sunny
+    ├── apr
+    ├── feb
+    ├── jan
+    └── mar
+
+create 100 lss.txt file in a second
+--------------------------------------
+touch lss{1.100}.txt
+
+
+Q. create 5 directory named with dir1 , dir2 , dir3 , dir4 and dir5 . In these directories create empty files named
+   with a.txt , b.txt , c.txt
+   
+mkdir -p dir{1..5}/{a.txt,b.txt,c.txt}   
 1. cat
 ------
 cat filename.extension
@@ -732,14 +1180,43 @@ sed 'nd' filename
 n -> defines no of line
 
 
-sed '3q' filename [print 3rd col]
-sed '3,6p' filename [print from 3 to 6th col]
-sed '3,$p' filename 
 
-|-> Line addressing
-|-> Context addressing
-|-> Text addressing
-|-> Substitution
+
+MORE THINGS IN SED
+-------------------
+1- Insert one blank line after each line:
+------------------------------------------
+sed > G line.txt
+line-1
+line-2
+line-3
+
+sed G line.txt
+
+line-1
+
+line-2
+
+line-3
+
+2. To insert two blank lines:
+-----------------------------
+sed 'G;G' line.txt
+
+3. Delete blank lines and insert one blank line after each line 
+--------------------------------------------------------------
+sed '/^$/d;G' line.txt
+
+
+4. Delete all blank spaces
+---------------------------
+
+
+^$ --> is used for deleting all blank spaces
+/d is used for display 
+G is used for Gap/Blanks
+
+
 
 
 
