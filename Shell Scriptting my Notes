@@ -504,8 +504,180 @@ Relative Path(start from current location)
 /home/daadestroyer/Desktop/x/x1/x11
 
 cd ./../../.. (till here we come to desktop)
-cd ./../../../y/y2 
+cd ./../../../y/y2 	
+
+Topic-6: Working with files
+============================
+Copy Command:-
+--------------
+1. to copy content of one file to another file
+----------------------------------------------
+cp source_file destination_file
+
+>> If the destination file is not available then cp command itself will create that file and total content also copied
+>> If destination file will already available and it contain some data , then that data will overriden with new data
+
+
  
+
+2. to copy files to directory
+------------------------------
+cp file1 file2 file3 destination_directory (all these files will be copied to destination directory)
+
+
+3. To copy all files of one directory to another dir
+-------------------------------------------------------
+mkdir a b 
+
+a
+├── a1.txt
+├── a2.txt
+└── a3.txt
+
+cp a/* b
+
+
+b
+├── a1.txt
+├── a2.txt
+└── a3.txt
+
+
+4. Whenever we are copying whole directory to another directory always use -r option
+-----------------------------------------------------------------------------------
+mkdir a
+
+
+a
+├── a1.txt
+├── a2.txt
+└── a3.txt
+
+cp -r a c
+
+c
+├── a1.txt
+├── a2.txt
+└── a3.txt
+
+
+
+How to copy data from multiple files into a single file?
+--------------------------------------------------------
+cp won't work for this requirement 
+
+cat command will work here
+
+Moving and Renaming Directories
+-------------------------------
+Moving --> mv
+Rename --> mv
+
+1. Renaming of a file 
+---------------------
+mv oldfilename newfile
+
+touch a.txt
+
+mv a.txt aaa.txt
+
+2. Renaming Directories
+-------------------------
+mv old_dirname new_dirname
+
+mkdir aa.txt
+mv aa.txt aaa.txt
+
+3. Moving of files from one directory to another directory
+-----------------------------------------------------------
+
+1. move all files present inside dir1 to dir2
+-----------------------------------------------
+
+mv dir1/* dir2 (dir2 must me alredy there)
+
+
+2. move total directory to another directory	
+---------------------------------------------
+mv dir1 dir2
+
+if destionation dir is already available then dir1 will be moved to dir2
+if the destionation dir not already available then dir1 will be renamed to dir2
+
+
+
+Summary of dir related command
+------------------------------
+
+mkdir dir1
+mkdir dir1 dir2 dir3
+mkdir -p dir1/dir2/dir3
+mkdir dir{1..6} 
+rm -r dir1
+rm -ri dir1
+
+
+Topic-6: Working with files
+===========================
+1. creation of files:
+---------------------
+in linux we can create file using:
+
+a) by using cat command
+b) by using touch command
+c) by using editor like gedit , nano , vi
+
+
+a) by using cat command
+-----------------------
+used to create file with some content
+if file is not already there then a new file will be created and the provided data will be written to that file
+
+cat > file1.txt
+line1
+line2
+line3
+ctrl + d (to save and exit)
+
+if file1 is already there and we are using cat command then the data will be override
+to prevent data with overridng and append new data use >> operator after cat
+
+cat >> file1.txt
+line1
+line2
+line3
+ctrl + d 
+
+b) by using touch command
+-------------------------
+use to create empty file
+if file is not there then new file will be created
+
+touch file1.txt
+
+the main objective of touch command
+--------------------------------------
+1. to create empty file
+2. to change timespamp of an existing file
+3.
+
+
+c) by using editor like gedit , nano , vi
+-----------------------------------------
+
+2. viewing of files
+-------------------
+
+3. copying of files
+--------------------
+4. comparision of filese
+5. renaming of files
+6. deleting of files
+7. creationg of hidden files and directories
+8. creation of link files
+9. editing of files
+
+
 1. cat
 ------
 cat filename.extension
