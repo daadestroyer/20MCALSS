@@ -715,11 +715,11 @@ to copy content of multiple file to a single file
 file1 file2 file3 file4 file5 > total.txt
 
 to append content of multiple file to a single file
--------------------------------------------------
+---------------------------------------------------
 file1 file2 file3 file4 file5 >> total.txt
 
 
-2. tac[vertical reversal]
+2. tac[vertical reversal]   
 -------
 It is reverse of cat command means display content in reverse form
 here total content will reverse but line not reverse 
@@ -770,6 +770,47 @@ wc -w filename  [get no of words]
 wc -c filename  [get no of characters]
 wc -wc filename [get no of word and character]
 wc -lc filename [get no of line and character]
+
+More and Less Command
+---------------------
+More Command
+------------
+we can use more command to view file content page by page.
+
+1. more abc.txt
+   Press enter --> next line will display
+   Press spacebar --> next page will be display 
+   Press q --> to exit/quit
+   
+2. more -d abc.txt
+   -d --> option meant for providing details
+   
+   
+Less Command
+------------
+1. By using more more command we can view file content page by page only in forward direction 
+2. If we want to view file content page by page either in forward direction or in backward direction then we should   
+   use less command
+
+
+less abc.txt
+
+d --> to get next page	(d means down)
+b --> to go to previous page(b means backward)
+
+
+Hidden Files and Directories
+=============================
+
+
+
+
+
+
+
+
+
+
 
 
 Redirection
