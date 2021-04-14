@@ -1273,6 +1273,33 @@ NOTE: in piping next command won't accept stream if it won't accept stream conve
 
 Topic-14: How to use multiple commands in a single file
 =======================================================
+command1 | command2 | command3
+
+	 All these commands are dependent commands 
+	 
+How to execute multiple independent command in a single line:
+-------------------------------------------------------------
+2 Ways
+
+1. By using semicolon ;
+-----------------------
+cmd1;cmd2;cmd3;cmd4;.......;cmdn
+In case of semicolon if any commands fail in middle then the remaining commands will be executed.
+
+2. By using &&
+--------------
+cmd1 && cmd2 && cmd3 && cmd4 && cmd5 &&......&& cmdn
+In case of and if any commands fail in middle then the remaining commands will not be executed.
+
+eg:
+
+create a directory dir1
+create files a.txt , b.txt , c.txt in that dir1
+Write current system date and time to a.txt
+Write current month calendar to b.txt 
+
+mkdir dir1;touch dir1/{a..c}.txt;date > dir1/a.txt;cal >> dir1/b.txt
+mkdir dir1&&touch dir1/{a..c}.txt&&date > dir1/a.txt&&cal >> dir1/b.txt
 
 
 
