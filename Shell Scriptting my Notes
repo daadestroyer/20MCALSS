@@ -9,19 +9,19 @@ Developer ===> Linux
 
 90% of real time application ===> Linux Platform
 
-Topic-1: Overview of UNIX/LINUX OS
-Topic-2: Linux File System
-Topic-3: Linux Installation
-Topic-4: ls ,date,cal command
-Topic-5: Working with directories
-Topic-6: Working with files
-Topic-7: Comparing Files
-Topic-8: Creation of links
-Topic-9: Word Cound (WC Command)
-Topic-10: Sorting content of the file
-Topic-11: Find unique content in the file by using uniq command
-Topic-12: Input/Output redirection
-Topic-13: Piping
+Topic-1: Overview of UNIX/LINUX OS     DONE
+Topic-2: Linux File System 	       DONE
+Topic-3: Linux Installation  		DONE
+Topic-4: ls ,date,cal command   	DONE
+Topic-5: Working with directories	DONE
+Topic-6: Working with files 		DONE
+Topic-7: Comparing Files		DONE
+Topic-8: Creation of links		DONE
+Topic-9: Word Cound (WC Command)	DONE
+Topic-10: Sorting content of the file 	DONE
+Topic-11: Find unique content in the file by using uniq command 	DONE
+Topic-12: Input/Output redirection  				DONE
+Topic-13: Piping						DONE
 Topic-14: How to use multiple commands in a single file
 Topic-15: Regular Exression and wild card characters
 Topic-16: Command Alisaing 
@@ -1180,8 +1180,8 @@ Ans:-
 >> symbol meant from output and error redirection where append will be happened
 ----
 
-Piping Concept
--------------
+Topic-13: Piping
+================	
 >> for the command in how many ways we can provide input : cm1 arguement or from standard ip
 >> By using piping , multiple commands will work together to fulfill our requirement .
 >> We can implement piping concept using | command 
@@ -1198,18 +1198,18 @@ ls -l /etc | wc | wc -l
 
 Requirement:
 ------------
-the op of LS command should be saved to file output.txt and should be provided to as input to wc command ?
+the OP of ls command should be saved to file output.txt and should be provided to as input to wc command ?
 
 ls -l > output.txt | wc -l
 ls -l >> output.txt c -;
 
-In the middle of piping if i use redirection then it breaks pipinf concept
+In the middle of piping if i use redirection then it breaks piping concept
 
 
 
 Tee Pipe OR T-Junction
 ----------------------
-In piping if we want to save the OP of one command to afilwaand if we wanr to send one command to a file and if we want
+In piping if we want to save the OP of one command to and if we want to send one command to a file and if we want
 to pass that OP to next command simul.. then we use tee command  		
 
 ls -l | tee output.txt | wc 
@@ -1260,10 +1260,20 @@ cat input.txt | rm
 
 xargs command:
 --------------
+touch file1.txt file2.txt file3.txt file4.txt file5.txt
+
+cat > input.txt
+file1.txt
+file2.txt
+file3.txt
 
 cat input.txt | xargs rm
 
-NOTE: in piping next command won't accept stream if it won't accept stram convert it into CMD line args using xargs
+NOTE: in piping next command won't accept stream if it won't accept stream convert it into CMD line args using xargs
+
+Topic-14: How to use multiple commands in a single file
+=======================================================
+
 
 
 >> By using wildcard character we can build regular expression
