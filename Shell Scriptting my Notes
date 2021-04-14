@@ -517,9 +517,7 @@ cp source_file destination_file
 >> If the destination file is not available then cp command itself will create that file and total content also copied
 >> If destination file will already available and it contain some data , then that data will overriden with new data
 
-
  
-
 2. to copy files to directory
 ------------------------------
 cp file1 file2 file3 destination_directory (all these files will be copied to destination directory)
@@ -560,13 +558,19 @@ c
 ├── a2.txt
 └── a3.txt
 
+5. Before overwritting if we want confirmation then we should use -i option i mean interactive
+-----------------------------------------------------------------------------------------------
+cp -i file1.txt file2.txt
 
+6. If we want verbose output then -v option.
+-----------------------------------------------------------------------------------------------
+cp -v file1.txt file2.txt dir1
 
 How to copy data from multiple files into a single file?
 --------------------------------------------------------
-cp won't work for this requirement 
+cat a.txt b.txt c.txt d.txt > all.txt
 
-cat command will work here
+
 
 Moving and Renaming Directories
 -------------------------------
@@ -749,7 +753,202 @@ tail -n -5 filename [it will display last 5 lines]
 tail	d -c 100 filename [display first 100 character of the file]
 
 
+More and Less Command
+---------------------
+More Command
+------------
+we can use more command to view file content page by page.
 
+1. more abc.txt
+   Press enter --> next line will display
+   Press spacebar --> next page will be display 
+   Press q --> to exit/quit
+   
+2. more -d abc.txt
+   -d --> option meant for providing details
+   
+   
+Less Command
+------------
+1. By using mores command we can view file content page by page only in forward direction 
+2. If we want to view file content page by page either in forward direction or in backward direction then we should   
+   use less command
+
+
+less abc.txt
+
+d --> to get next page	(d means down)
+b --> to go to previous page(b means backward)
+
+
+Creation of Hidden Files and Directories
+=========================================
+If any file start with . symbol such file said to be hidden file
+If we don't want to display in normal listing then we have to go for hidden files.Hidden files meant for hiding data
+. All system files which are internally required by kernel are hidden files only...
+
+we can create hidden files like normal file , only difference is file name should start with dot symbol
+
+touch .securefile1.txt
+
+we can create hidden directory also
+-----------------------------------
+mkdir .db_info
+
+Conversion of normal files to hidden files
+---------------------------------------------
+
+converting hidden dir or file into normal file
+----------------------------------------------
+mv .securefile.txt unsecurefile.txt
+
+converting normal dir or file into hidden file
+----------------------------------------------
+mv unsecurefile.txt ssecurefile.txt
+
+
+to make full secure we have to use permission concept by using chmod 
+
+Topic-7: Comparing Files
+========================
+we can compare data of two files by using following commands:
+
+cmp
+diff
+sdiff
+vidff
+comm
+
+
+1. cmp
+---------
+it will compare byte by byte	
+
+syntax : cmp file1.txt file2.txt
+	if content is same we won't get any output
+	if content is different , then it provides information about only first
+	differnece . byte number and line number will be provided .
+
+2. diff
+---------
+if will show all differences 
+
+syntax : diff file1.txt file2.txt
+ 	 if content is same it won't produce any output
+ 	 if content is same different then it will show all differences 
+
+options: -q shows message when files are different
+         -s shows message when files are same
+         -y shows comparisong line by line(parallel comparison)
+         
+ 	 
+sdiff
+vidff
+comm
+
+Topic-8: Creation of links
+==========================
+
+Windows Desktop Shortcut
+------------------------
+
+
+There are two types of link files:
+----------------------------------
+1. Hard Link File
+-------------------
+A hard link acts as a copy (mirrored) of the selected file. It accesses the data available in the original file.
+If the earlier selected file is deleted, the hard link to the file will still contain the data of that file.
+
+
+>> only one copy is there but seems to be every where physical copy is available 
+>> hardlink file is just another name of the same exact file
+>> whatever the changes you make in original file all changes will reflect in hardlink file also
+>> similarly whatever changes we perform in hardlink file all changes will reflect to original file also
+>> if we remove original file still link file can be accessible 
+
+
+-rw-rw-r-- 2 daadestroyer daadestroyer 40 Apr  7 11:05 file1Ln.txt
+-rw-rw-r-- 2 daadestroyer daadestroyer 40 Apr  7 11:05 file1.txt
+
+>> both original and hardlink file name has same inode number
+>> both original and hardlink file have same size 
+>> both original and hardlink file have same timestamp
+
+						shubham.jpeg
+		
+actress directory                     social services people directory         google top ranked people directory
+
+syntax:
+-------
+$ ln original_file_name hard_link_file_name
+
+eg : ln file1.txt file2ln.txt
+
+actress
+   |-sunny.jpeg
+   |
+   |
+social service
+   |
+   |-sunny.jpeg
+   |
+
+ln actress/sunny.jpeg social/sunny.jpeg
+
+
+2. Soft Link File
+-----------------
+A soft link (also known as Symbolic link) acts as a pointer or a reference to the file name. It does not access the data available in the original file. If the earlier file is deleted, the soft link will be pointing to a file that does not exist anymore.
+
+>> This is just like windows desktop shortcut
+>> softlink file is just a pointer to another file
+>> also called as symbolic link
+>> we can create softlink file by using ln command but with -s options
+>> whatever the changes you make in original file all changes will reflect in hardlink file also
+>> similarly whatever changes we perform in hardlink file all changes will reflect to original file also
+
+
+syntax:
+-------
+ln -s originalFileName softLinkFileName
+
+ex : ln -s file1.txt file2Ln.txt
+
+
+lrwxrwxrwx 1 daadestroyer daadestroyer  9 Apr  7 11:28 file1Ln.txt -> file1.txt
+-rw-rw-r-- 1 daadestroyer daadestroyer 32 Apr  7 11:28 file1.txt
+
+The difference b/w hardlink and softlink is :
+-----------------------------------------------
+in softlink seperate level of pointer will assigned on softlink file
+in softlink case both the file hard and softlink file both have different timespamp
+in softlink case both the file hard and softlink file both have different inode table
+
+
+if we delete original file then softlink file will be useless
+
+
+ls -l
+l ==> for soft link file
+
+...
+
+several changes to the original file
+now old copy available if we have seperate copy
+
+
+Link files for directories
+--------------------------
+For files we can create both softlinks and hardlinks 
+For directories we can create only soflinks but not hardlinks
+
+
+We cannot create hardlink for directory because it break filesystem hirearchy
+
+
+Topic-9: Word Cound (WC Command)
+================================
 Word Count Command(wc command)
 ------------------------------
 We can count no of words along with that we can count no of lines and no of character present in the given file
@@ -771,90 +970,151 @@ wc -c filename  [get no of characters]
 wc -wc filename [get no of word and character]
 wc -lc filename [get no of line and character]
 
-More and Less Command
----------------------
-More Command
-------------
-we can use more command to view file content page by page.
 
-1. more abc.txt
-   Press enter --> next line will display
-   Press spacebar --> next page will be display 
-   Press q --> to exit/quit
-   
-2. more -d abc.txt
-   -d --> option meant for providing details
-   
-   
-Less Command
-------------
-1. By using more more command we can view file content page by page only in forward direction 
-2. If we want to view file content page by page either in forward direction or in backward direction then we should   
-   use less command
+Topic-10: Sorting content of the file
+=====================================
+
+SORT
+----
+>> sort command sort the file , arranging the records in a particular order
+>> by default the sort command sorts file assuming the content are ASCII
+>> using option in sort command , it can also be used to sort numerically
 
 
-less abc.txt
+1. Sort in alphabetical order
+-----------------------------
+sort filename.txt
 
-d --> to get next page	(d means down)
-b --> to go to previous page(b means backward)
+2. Sort on numerical value [option -n]
+----------------------------------------
+sort filename.txt
+
+3. Sort in reverse order [option -r]
+------------------------------------
+sort -r filename.txt 
+
+4. Save the sorted results to another file
+---------------------------------------
+sort -n filename.txt  > filename_sorted.txt
+
+5. Sort Specific Column [option -k]
+----------------------------------------------------
+sort -t "|" +0 emp1.lst [sort the 0th col of file]
+sort -t "|" +1 emp1.lst [sort the 1st col of file]
+sort -t "|" +2 emp1.lst [sort the 2nd col of file]
+sort -t "|" +5 -n emp1.lst [sort the numeric coloum]
+
+sort the numeric colom:
+-----------------------
+sort -t "|" -n +5 emp.lst
 
 
-Hidden Files and Directories
-=============================
+6. reverse the 5th numeric col in file in desc order
+-------------------------------------------
+sort -t "|" -r -n +5 emp1.lst
+
+7. rev the 1st col of file in desc order
+----------------------------------------
+sort -t "|" -r +1 emp1.lst
+
+8. rev the 2nd col of file in asc order
+-----------------------------------------
+sort -t "|" +2r emp1.lst
+
+9. start sort from 2nd char of 1st col till goes on 1 col of 4th char
+---------------------------------------------------------------------
+sort -t "|" +1.2 - 1.4 emp1.lst	
 
 
+Input and Output of command:
+----------------------------
+>> Commands can take input , perform required operation and produces some output . While executing command if    
+   anything goes wrong we will get error message
+>> Commands take input either from standard input or from command line arguemnts 
+>> Commands can produce results either to standard output or standard error
+
+>> Standard input , Standard output and Standard error are data streams 
+>> Standard ip , Standard op and standrad error are data streams
 
 
+>> Command line args are static and the nature
 
 
-
-
-
-
-
-
-Redirection
+Topic-12: Input/Output redirection
 -----------
-Redirection is a feature in Linux such that when executing a command, you can change the standard input/output devices. The basic workflow of any Linux command is that it takes an input and give an output.
-
->>> The standard input (stdin) device is the keyboard.
->>> The standard output (stdout) device is the screen.
-With redirection, the above standard input/output can be changed.
-
-Standard Input,Standard Output ,Standard Error are data streams and can flow from one place to another place . We can
-can redirect these streams
-
 File				File Descriptor
 -------------------------------------------------
 Standard Input STDIN	   	       0
 Standard Output STDOUT		       1
 Standard Error STDERR		       2
 
+Redirection is a feature in Linux such that when executing a command, you can change the standard input/output devices. The basic workflow of any Linux command is that it takes an input and give an output.
 
-1. Redirection Standard Output
-------------------------------
+>>> The standard input (stdin) device is the keyboard.
+>>> The standard output (stdout) device is the screen.
+    With redirection, the above standard input/output can be changed.
+
+Standard Input,Standard Output ,Standard Error are data streams and can flow from one place to another place
+
+
+
+Bydefault standard ip is connected with the keyboard	
+Bydefault standard output and standard error are connected with terminal
+
+
+Standard Input from keyboard and output and output to the standard output devices 
+---------------------------------------------------------------------------------
+cat 	
+ip-> shubham
+op-> shubham
+ip-> nigam
+op-> nigam
+
+>> for the cat command , if we're not passing any argument then it will take input from standard input device   
+   (keyboard)
+>> It will display that output to the standard output device(terminal)
+
+
+
+Input from command line argument and error message to standard error device:
+---------------------------------------------------------------------------- 
+
+Note: 
+Every command can take input from standard input device and from command line arguments ==> wrong
+
+cat ==> can take input from standard input device and from command line arugmentes also
+cat abc.txt
+
+rm => can expect input only from command line args but not from standard input device 
+rm abc.txt
+
+echo => expecting input from cmd line args  but not standard input 
+
+
+
+1. Redirection STANDARD OUTPUT
+-------------------------------
 >> Standard OP is associated with 1 (0 means standard IP , 1 means standard OP , 2 means standard error)
 >> Standard OP connected with terminal
 >> By default standard OP connected with terminal but we can redirect this standard OP from terminal to some where else
    based on our req
 >> We can perform output redirection by using > and >> symbols
-
-
 > will perform overwriting of existing data
 >> will perform appending to exitsing data
 
 Eg. to redirect standard OP to cat command from terminal to output.txt 
 
-
-$ cat 1 > output.txt[perform overwriting in file]
-$ cat 1 >> output.txt[perform appending of data in file]
+																																																																																																																																							
+$ cat filename 1 > output.txt[perform overwriting in file]
+$ cat filename 1 >> output.txt[perform appending of data in file]
 
 	
 >> by default > and >> is always meant for ouput redirection only 
 >> for using > or >> we don't need to use 1 always it is optional
 
+cat INPUT.txt > OUTPUT.txt [redirecting output from standard op device which is terminal]
 
-2. Redirecting standard error
+2. Redirecting STANDARD ERROR
 -----------------------------
 >> Bydefault standard error device is connected to terminal . Instead of terminal we can redirect error message from 
 >> terminal to our required place based on our requirement
@@ -869,7 +1129,7 @@ cal 1234
 >> in redirection output taking no in command cat 1 > filename [here taking 1 is not compl..]
 >> but in redirecting error taking no is compl... cal dfdfdfdf 2>> error.txt
 
-3. Redirection standard input
+3. Redirection STANDARD INPUT
 -----------------------------
 >> By default standard ip device is connected with keyboard. but we can redirect from keyboard to somewhere else  
    based on our requirement
@@ -877,22 +1137,48 @@ cal 1234
 >> Standard IP stream associated with 0
 >> We can perform input redirection by using < symbol
 
-$ cat 0< a.txt
+$ cat 0< a.txt [this command won't take input from command line args it always take input from standard ip which is 
+               terminal and input is coming frmo a.txt]
 
 >> this command is taking input from the a.txt insteam from keyboard[standard input] , it will display OP to standard 
    OP device 
 >> here 0 is not compl...
 
+cat < INPUT.txt [taking input from INPUT.txt which is standard ip device and not from cmd line args]
+
 Read IP from a.txt and send that OP to output.txt
 -------------------------------------------------
-cat 0< a.txt 1> output.txt
-cat < a.txt > output.txt
+cat < a.txt > output.txt [take ip from a.txt thru standard ip which is terminal and not from cmd line args]
+or
+cat a.txt > b.txt
+or
+cat a.txt >> b.txt
 
-cat < a.txt >> output.txt
+
+Suppose both output and error redirected to result.txt only
+-----------------------------------------------------------
+cat a.txt > result.txt 2>result.txt
+or
+cat a.txt &> result.txtg
+
+> , >> ----> either outout redirection or error redirection 
+&>     ----> both output and error redirection to a single place
 
 
+Q. How we can redirect the standard op of the ls command to output.txt , but at the same time , redirect standard 
+   error to error.txt
+----
+Ans:-
+ls > output.txt 2> error.txt
+----
 
-
+Q. What is the difference b/w < , > , >> symbols ?
+----
+Ans:-
+< symbols meant for input redirection
+> symbols meant for output and error redirection where overwritting  will be happened
+>> symbol meant from output and error redirection where append will be happened
+----
 
 Piping Concept
 -------------
@@ -1072,51 +1358,6 @@ mv [[:alpha:]]*.txt dir2
 -----------------------------------------------------------------
 rx [abc]*[et]
 
-SORT
-----
->> sort command sort the file , arranging the records in a particular order
->> by default the sort command sorts file assuming the content are ASCII
->> using option in sort command , it can also be used to sort numerically
-
-
-1. Sort in alphabetical order
------------------------------
-sort filename.txt
-
-2. Sort on numerical value [option -n]
-----------------------------------------
-sort filename.txt
-
-3. Sort in reverse order [option -r]
-------------------------------------
-sort -r filename.txt 
-
-4. Save the sorted results to another file
----------------------------------------
-sort -n filename.txt  > filename_sorted.txt
-
-5. Sort Specific Column [option -k]
-----------------------------------
-sort -t "|" +0 emp1.lst [sort the 0th col of file]
-sort -t "|" +1 emp1.lst [sort the 1st col of file]
-sort -t "|" +2 emp1.lst [sort the 2nd col of file]
-sort -t "|" +5 -n emp1.lst [sort the numeric coloum]
-
-6. reverse the 5th numeric col in file in desc oreder
--------------------------------------------
-sort -t "|" -r -n +5 emp1.lst
-
-7. rev the 1st col of file in desc order
-----------------------------------------
-sort -t "|" -r +1 emp1.lst
-
-8. rev the 2nd col of file in asc order
------------------------------------------
-sort -t "|" +2r emp1.lst
-
-9. start sort from 2nd char of 1st col till goes on 1 col of 4th char
--------------------------------------------------------------------
-sort -t "|" +1.2 - 1.4 emp1.lst
 
 
 CUT COMMAND
