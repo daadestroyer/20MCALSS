@@ -9,8 +9,8 @@ Developer ===> Linux
 
 90% of real time application ===> Linux Platform
 
-Topic-1: Overview of UNIX/LINUX OS     DONE
-Topic-2: Linux File System 	       DONE
+Topic-1: Overview of UNIX/LINUX OS       DONE
+Topic-2: Linux File System 	        DONE
 Topic-3: Linux Installation  		DONE
 Topic-4: ls ,date,cal command   	DONE
 Topic-5: Working with directories	DONE
@@ -22,9 +22,9 @@ Topic-10: Sorting content of the file 	DONE
 Topic-11: Find unique content in the file by using uniq command 	DONE
 Topic-12: Input/Output redirection  				DONE
 Topic-13: Piping						DONE
-Topic-14: How to use multiple commands in a single file
-Topic-15: Regular Exression and wild card characters
-Topic-16: Command Alisaing 
+Topic-14: How to use multiple commands in a single file          DONE
+Topic-15: Command Alisaing 					DONE
+Topic-16: Regular Exression and wild card characters 
 Topic-17: Locate and Find Command
 Topic-18: Compression and Uncompression of files (tar,gzip,gunzip,bzip2,bunzip2)
 Topic-19: Grep Command
@@ -1302,6 +1302,83 @@ mkdir dir1;touch dir1/{a..c}.txt;date > dir1/a.txt;cal >> dir1/b.txt
 mkdir dir1&&touch dir1/{a..c}.txt&&date > dir1/a.txt&&cal >> dir1/b.txt
 
 
+Topic-15: Command Alisaing
+==========================
+>> Alias means alternative name or nick name
+>> We can give our own convinient nicknames for unix commands . This concept is called command aliasing
+
+How to create alisname:
+-----------------------
+We have to use alias command	
+
+$ alias nickname='original command'
+$ alias nickname="original command"
+
+
+Linux Administration Basics
+---------------------------
+Topic : 1 - Job Scheduling with crontab
+---------------------------------------
+>> cron is derived from greek and its meaning is TIME
+>> if any jobs execute automatically at specified time interval such types of jobs are called cron jobs
+>> cron jobs can be a single command or can be a script
+>> We have to configure cronjobs in crontab
+>> cronjobs are best suitable for automation activity
+ 
+ 
+Various important commands:	
+---------------------------
+crontab -l  ==> to list out all my cronjobs which are already
+crontab -e  ==> to edit already existing cronjob and to define new cronjobs
+crontab -r  ==> to remove all configured cronjob 
+crontab filename ==> to install a new crontab from a file
+
+
+
+Format to configure cronjob:
+----------------------------
+m   h  dom  mon   dow   command
+
+m---> minutes , the allowed minutes range 0 - 59
+h---> hours , the allowed values range 0 - 23 
+dom ---> Day of month , allowed values range is 1 - 31
+mon ---> month of year , allowed values range 1 - 12 
+	 even we can take english words JAN,FEB,MAR,APR,MAY...DEC
+dow ---> day of week , the allowed values range is 0 to 6
+	 even we can take english words SUN(0),MON(1),TUE(2),WED(3)....SAT
+
+
+Q.1 Configue cronjob which writes hello message to hello.txt for every minutes
+-----------------------------------------------------------------------------
+
+format  :  m   h   dom   mon   dow   command
+example :  *   *    *     *     *    echo "hello from crontab" >> ~/Desktop/hello.txt
+
+
+
+Q.2 Write a script that takes backup of desktop directory and place that backup copy inside backup directory 
+    presnt   in user/home die
+    Configure this script as cron job , which should be executed after FRIDAY 23:59
+   -----------------------------------------------------------------------
+test.sh:
+--------
+timestamp=$(date + %d_%m_%Y_%H_%M)
+tar -cjf backup_&timestamp.tar ~/Desktop/*
+mv backup_&timestamp.tar ~/backup
+
+m      h   dom  mon  dow  command
+59  :  23   *    *   FRI
+
+
+backup_20_04_2021_12_30.tar
+
+c -> compress file 
+j -> 
+f -> create named file
+    
+     
+using crontab u can't print anything to terminal
+7th 4:15
 
 >> By using wildcard character we can build regular expression
 >> A wildcard character can be used as a substitute for required sequence of characters in regular expression
