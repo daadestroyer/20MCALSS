@@ -24,11 +24,11 @@ Topic-12: Input/Output redirection  				DONE
 Topic-13: Piping						DONE
 Topic-14: How to use multiple commands in a single file          DONE
 Topic-15: Command Alisaing 					DONE
-Topic-16: Regular Exression and wild card characters 
-Topic-17: Locate and Find Command
-Topic-18: Compression and Uncompression of files (tar,gzip,gunzip,bzip2,bunzip2)
-Topic-19: Grep Command
-Topic-20: Cut Command
+Topic-16: Regular Exression and wild card characters  		DONE
+Topic-17: Locate and Find Command				DONE
+Topic-18: Compression and Uncompression of files (tar,gzip,gunzip,bzip2,bunzip2)   DONE
+Topic-19: Grep Command					DONE
+Topic-20: Cut Command					DONE
 Topic-21: File Permission
 Topic-22: Working with editors
 Topic-23: Shell Scriptting and Shell Programming
@@ -1450,6 +1450,35 @@ alias current='ls -l | tee output.txt | wc -l'
 >> By using wildcard character we can build regular expression
 >> A wildcard character can be used as a substitute for required sequence of characters in regular expression
 
+
+Topic-16: Regular Exression and wild card characters
+====================================================
+>> A collection of strings which are having a particular pattern called as regular expression
+>> If we want to represent a collection of strings according to a particular pattern then we should go for regular 
+   expression
+
+Mobile number regex
+-------------------
+[6-9][0-9]{9} ==> regex which represent all 10 digit mobile number in india
+
+Mail ID regex
+-------------
+[a-z]{20}@[gmail][yahoo].com
+
+Where regex are applicable
+--------------------------
+1. In form validation / to build validation frameworks
+   To validate mobile number , mail id , employee id
+   
+2. To become best software engineer
+   ctrl + f -> find
+   ctrl + v -> paste 
+   ctrl + c -> copy
+
+3. By using wild card character , we can build regular expression 
+
+A wildcard character can be used as a substitute for required sequence of characters in regular expression 
+	
 *              -->   represent zero or more character i.e any no of characters
 ?              -->   represent only one character
 []             -->   represent range of characters
@@ -1540,7 +1569,160 @@ mv [[:alpha:]]*.txt dir2
 rx [abc]*[et]
 
 
+Topic-17: Locate and Find Command
+=================================
 
+Find command:
+-------------
+>> we can use find command to find files and directories present in our system .
+>> It provide more search option when compated with locate command like
+
+
+1. Search only files
+2. Search only directories
+3. Search by name 
+4. Search by size
+5. We can restrict maxdepth
+6. We can use search result automatically for some commands
+
+>> locate command internally uses database to find result and won't search in the file system directory
+>> find command will search in the file system directly . We can expect more accurate results.
+
+
+1. $ find 
+It will find all files and directories in current working directories and below in linux file system . This is default
+behavious 
+
+2. we can find all files and directories in the specified directory and below 
+
+$ find /dev
+$ find /etc
+
+maxdepth option
+---------------
+
+Desktop
+  |-file1.txt
+  |-level_1_dir
+  	|-file2.txt	
+  	|-level_2_dir
+  	       |-file3.txt	
+  	       |-level_3_dir
+  	       	      |-file4.txt
+  	       	      |-level_4_dir
+  	       	      	     |-file5.txt	
+  	       	      	     
+  	       	      	     
+  	       	      	     
+mkdir -p level_1_dir/level_2_dir/level_3_dir/level_4_dir   	       	      	     
+  	 
+  	 
+Topic-18: Compression and Uncompression of files (tar,gzip,gunzip,bzip2,bunzip2)
+================================================================================
+tar,gzip,gunzip,bzip2,bunzip2
+
+Advantage of compression and uncompression
+------------------------------------------
+1. It improvies memory utilization
+2. Transportation will become very easy
+3. Reduces traffic in the network
+4. It reduces download times 
+
+
+STEPS:
+------
+1. Creation of archive file
+2. Apply compression algorithms on that archive file
+
+
+1. Creation of archive file:
+----------------------------
+tar command 
+tar --> tape archive 
+
+we can group multiple file and directories into a single archive file by usnig tar command
+
+A) To create a tar file:
+------------------------
+tar -cvf demo.tar file1.txt file2.txt file3.txt
+	
+-c => create
+-v => verbose
+-f => name of file
+
+B) To display table of contents of tar file:
+--------------------------------------------
+tar -tvf data.tar
+
+-t => table of contents
+
+
+C) To extract contents of tar file:
+-----------------------------------
+-x => extraction
+
+tar -xvf data.tar
+
+2. Apply compression algorithms on that archive file:
+-----------------------------------------------------
+There are multiple compression and decompression algorithms 
+
+1. gzip
+2. bzip2
+
+Compression and Decompression by using gzip
+-------------------------------------------
+1. To compress
+	gzip demo.tar
+	demo.tar.gz will be created
+	
+2. To uncompress gz file
+	gzip -d demo.tar.gz
+	or
+	gunzip demo.tar.gz
+
+
+To create tar file and compression in single command
+----------------------------------------------------
+1. By using gzip(z) algorithm
+
+To create tar and then compress 
+-------------------------------
+tar -cvzf demo.tar file1.txt file2.txt file3.txt
+
+To decompress and then extract
+------------------------------
+tar -xvzf demo.tar
+
+
+
+1. By using bzip2(j) algorithm
+
+To create tar and then compress 
+-------------------------------
+tar -cvjf demo.tar file1.txt file2.txt file3.txt
+
+To decompress and then extract
+------------------------------
+tar -xvjf demo.tars
+
+
+gzip ==> performance is good but less compression power
+bzip2 ==> performace is less but more compression power
+
+
+Topic-19: Grep Command:
+=======================
+
+
+
+
+
+
+
+
+Topic-20: CUT Command:
+======================  	       	      	     
 CUT COMMAND
 -----------
 we use cut command to extract data from file
