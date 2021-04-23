@@ -1362,9 +1362,9 @@ Q.2 Write a script that takes backup of desktop directory and place that backup 
    -----------------------------------------------------------------------
 test.sh:
 --------
-timestamp=$(date + %d_%m_%Y_%H_%M)
-tar -cjf backup_&timestamp.tar ~/Desktop/*
-mv backup_&timestamp.tar ~/backup
+timestamp=$(date +%d_%m_%Y_%H_%M)
+tar -cjf backup_$timestamp.tar ~/Desktop/*
+mv backup_$timestamp.tar ~/backup
 
 m      h   dom  mon  dow  command
 59  :  23   *    *   FRI
@@ -1376,24 +1376,91 @@ c -> compress file
 j -> 
 f -> create named file
     
-     
 using crontab u can't print anything to terminal
 7th 4:15
 
+
+
+Various possiblities of specifying date and time while configuring cron jobs:
+-----------------------------------------------------------------------------
+star means every minute
+
+m h dom mon dow command
+
+1. every minute * * * * *
+2. Every 2 min */2 
+   */2 means every second minute (0,2,4,6)
+3. Every even minute
+4. Every odd minute
+    (1,3,)  
+ 
+Topic-15: Command Alisaing 
+==========================
+Alias means alternative or nick name
+We can give our own convinient nick names for UNIX commands , this concept is called command alisaing 
+
+How to create alias name:
+-------------------------
+$alias nickname='original command'
+$alias nickname="original command"
+
+$alias nickname = 'original command' [don't give space otherwise it will not work]
+$alias nickname ='original command' [don't give space otherwise it will not work]
+
+
+How to list out all alias names
+-------------------------------
+We have to use alias command
+
+1. Define md as alias for making directory
+------------------------------------------
+md='mkdir'
+md shubham
+
+2. Define cls as alias name for clearing screen
+-----------------------------------------------
+cls='clear'
+clear
+
+How to remove alias name 
+------------------------
+$unalias command_name 
+
+
+Q. Can we have multiple alias name for single command
+Ans: Yes
+
+Q. I want to define alias name , but how to check is it available already
+Ans: No
+
+$ type cls
+cls is aliased to `clear'
+
+$ type cls1
+bash: type: cls1: not found
+
+a directory will be created in that 20 files will be created
+------------------------------------------------------------ 
+alias d20f='mkdir dir1;touch dir1/file{1..20}.txt'
+
+Eg: To listout all files present in current working directory , save this data to output.txt and display the number of lines to the terminal. Define alias name 'current' for this total activity?
+
+alias current='ls -l | tee output.txt | wc -l'
+	
 >> By using wildcard character we can build regular expression
 >> A wildcard character can be used as a substitute for required sequence of characters in regular expression
 
-* --> represent zero or more character i.e any no of characters
-? --> represent only one character
-[] --> represent range of characters
-[abc] --> a or b or c
-[!abc] --> except a,b,c
-[a-z] --> from small a to small z
-[A-Z] --> from capital A to capital Z
-[a-zA-Z] --> any upper/lower case character
-[0-9] --> any digit from 0 to 9
-[a-zA-Z0-9] --> any alpha numeric character
-[!a-zA-Z0-9] --> except any alpha numeric character means special characters
+*              -->   represent zero or more character i.e any no of characters
+?              -->   represent only one character
+[]             -->   represent range of characters
+[abc]          -->   a or b or c
+[!abc]         -->   except a,b,c
+[a-z]          -->   from small a to small z
+[A-Z]          -->   from capital A to capital Z
+[a-zA-Z]       -->   any upper/lower case character
+[0-9]          -->   any digit from 0 to 9
+[a-zA-Z0-9]    -->   any alpha numeric character
+[!a-zA-Z0-9]   -->   except any alpha numeric character means special characters
 
 
 [[:lower:]] --> any lower case alphabet symbol
