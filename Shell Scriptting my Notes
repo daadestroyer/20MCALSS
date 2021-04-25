@@ -2068,12 +2068,64 @@ $ ---> line end with
 1. grep '^d' demo.txt
    it will display all lines start with d character
       
-2. grep '^\java\>' demo.txt  
+2. grep '^\java' demo.txt  
    it will display all lines start with java word
         
+3. grep '^\<the\>' demo.txt 
+   it will display all lines start with the word 'the' 
         
-        
-                  
+4. grep '^[aeiou]' demo.txt
+   it will display all lines start with vower character 
+           
+5. grep '^[^aeiou]' demo.txt
+   it will display all lines not start with vowels
+              
+6. grep 't$' demo.txt
+   It will display all lines end with $t
+
+7. grep '[aeiou]$' demo.txt
+   end with a , e , i , o or u
+   
+8. grep '[0-9]$' demo.txt
+   end with 0,1,2,3,....9
+   
+9. grep [^....$] demo.txt
+   it display all lines which contain exactly 4 character
+   
+10. grep '^\.' demo.txt
+    display all lines start with . symbol   
+   
+   
+Q. command to delete blank lines in the given file
+---
+Ans:
+grep -v '^$' demo.txt > temp.txt
+mv temp.txt demo.txt
+---
+   
+   
+EGREP AND GREP Additional things
+--------------------------------
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+      
+[abc]  --> either a or b or c	
+[!abc] --> except a , b and c
+[^abc] --> either a or b or c       
 -----------------------------------------------------------------------------------
 
 
