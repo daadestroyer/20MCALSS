@@ -2324,21 +2324,142 @@ tr means translate , this command translate character by character
    NOTE : delete all lower case vowels in emp.dat
 
 
-FILTERS
+=====================================================================================================================
+Topic-21: File Permission
+-------------------------
+File permission described the allowed operations by various users.
 
----------
-1. head
-2. tail
-3. cut
-4. paste
-5. sort
-6. tr [tr 'a' 'A' < emp.lst] use for replacing
-7. tee
-8. sed
-9. grep
-10. fgrep
-11. egrep
+1. user categories
+2. permission types
+3. operations allowed related permissions
 
+
+1. user categories:
+-------------------
+wrt file permission , all user are divided into 4 types
+
+user/owner    --> represented by u
+group member  --> represented by g
+others member --> represented by o
+all           --> represented by a
+
+2. permission types:
+--------------------
+for file and directories there are 4 types of permission
+
+1. r --> read
+2. w --> write 
+3. x --> execute
+4. - --> no permission
+
+on the file read permission : we can view content of the dir (ls)
+on the file write permission : we can create/delete content of the file 
+on the file execute permission : we can execute file just like a program
+
+to enter into any dir (execute) permission is required list all files (read) permission is required
+to enter into any dir (execute) permission is required create file (write) permission is required
+
+without execute permission , read and write permission on the directories is useless
+
+3. operations allowed related permissions
+-----------------------------------------
+we can perform the following 3 operation 
+
++ ---> add a particular permission to user|group|others|all
+- ---> remove a particular permission to user|group|others|all
+= ---> assign a particular permission to user|group|others|all
+
+chmod command:
+--------------
+we can use chmod command to change file or directory permission
+
+syntax:
+-------
+chmod <user_category><operation><permission> dir_name/file name 
+chmod u+x test.sh
+
+eg:1
+	for user add execute permission
+	for group add write permission
+	for other remove read permission
+
+-rw-rw-r--
+drwxrwxr-x
+
+- or d --> tell about file or directory
+rw-    --> tell about user permission
+rw-    --> tell about group permission
+r--    --> tell about others permission
+
+
+1. chmod u+x demo.txt
+   adding execute permission for user in demo.txt file
+ 
+2. chmod u+w,g+rw,o+r demo.txt
+   adding write permission to user
+   adding read and write permission to group
+   adding read permission to other
+  
+3. chmod u+x,g-w,o+w demo.txt
+   adding execute permission to user
+   removind write permisstion to group
+   adding write permission to other
+   
+4. chmod u=rwx demo.txt
+   giving all permission to user
+   
+5. chmod g=rwx demo.txt
+   giving all permission to group
+  
+6. chmod o=rwx demo.txt
+   giving all permission to other
+
+7. chmod a=rwx demo.txt
+   giving all permission to everyone
+   
+   
+Numeric permission or Octal permission:
+---------------------------------------
+Numeric Permission
+------------------
+we can also specify permission by using octal number
+octal means base-8 and allowed digits are 0-7
+
+4 --> read
+2 --> write
+1 --> execute
+
+0 --> 000 --> no permission
+1 --> 001 --> only execute permission	  (MAIN)
+2 --> 010 --> only write permission       (MAIN)
+3 --> 011 --> write and execute permission
+4 --> 100 --> only read permission         (MAIN)
+5 --> 101 --> read and execute permission
+6 --> 110 --> only read and write permission
+7
+
+a) giving all types of permission to everyone
+---------------------------------------------
+   chmod 721 demo.txt
+  
+b) giving all types of permission to user only
+----------------------------------------------
+chmod 700 demo.txt
+
+c) giving all types of permission to group only
+-----------------------------------------------
+chmod 070 demo.txt
+
+d) giving all types of permission to other only
+-----------------------------------------------
+chmod 007 demo.txt
+
+e) giving read and write permission to user , write permission to other and read permission to other
+----------------------------------------------------------------------------------------------------
+chmod 621 demo.txt
+
+
+=====================================================================================================================
 
 
 SED
@@ -2348,7 +2469,7 @@ SED command in UNIX is stands for stream editor and it can perform lot’s of fu
 >> SED is a powerful text stream editor. Can do insertion, deletion, search and replace(substitution).
 >> SED command in unix supports regular expression which allows it perform complex pattern matching.
 
-OPTIOS : 
+OPTIONS : 
 --------
 s --> means substitution
 
