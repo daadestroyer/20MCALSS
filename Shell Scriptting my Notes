@@ -1394,6 +1394,9 @@ m h dom mon dow command
 4. Every odd minute
     (1,3,)  
  
+ 
+
+=====================================================================================================================
 Topic-15: Command Alisaing 
 ==========================
 Alias means alternative or nick name
@@ -1451,6 +1454,9 @@ alias current='ls -l | tee output.txt | wc -l'
 >> A wildcard character can be used as a substitute for required sequence of characters in regular expression
 
 
+
+
+=====================================================================================================================
 Topic-16: Regular Exression and wild card characters
 ====================================================
 >> A collection of strings which are having a particular pattern called as regular expression
@@ -1569,6 +1575,8 @@ mv [[:alpha:]]*.txt dir2
 rx [abc]*[et]
 
 
+
+=====================================================================================================================
 Topic-17: Locate and Find Command
 =================================
 
@@ -1616,7 +1624,8 @@ Desktop
   	       	      	     
 mkdir -p level_1_dir/level_2_dir/level_3_dir/level_4_dir   	       	      	     
   	 
-  	 
+ 
+=====================================================================================================================
 Topic-18: Compression and Uncompression of files (tar,gzip,gunzip,bzip2,bunzip2)
 ================================================================================
 tar,gzip,gunzip,bzip2,bunzip2
@@ -1695,7 +1704,6 @@ To decompress and then extract
 tar -xvzf demo.tar
 
 
-
 1. By using bzip2(j) algorithm
 
 To create tar and then compress 
@@ -1711,8 +1719,362 @@ gzip ==> performance is good but less compression power
 bzip2 ==> performace is less but more compression power
 
 
+
+=====================================================================================================================
 Topic-19: Grep Command:
 =======================
+grep --> 
+	globally search a regular expression and print it
+	global regular expression print 
+	global regular expression parser
+	
+locate , find VS grep:
+------------------------
+locate,find: to find required file and directories
+grep : to find required content in the file
+ 
+Syntax: 
+-------
+grep <pattern> filename
+	It prints all matched lines
+
+demo.txt:
+---------
+The most important subject is linux 
+learning linux is very easy
+the knowledge of linux is required everywhere 
+your father learn learn , linux now you required to learn linux
+java is programming language
+python is all rounder
+
+searching 'linux' in single file
+--------------------------------
+grep 'linux' demo.txt
+
+
+searching 'linux' is multiple file
+----------------------------------
+grep 'linux' demo.txt subject.txt
+
+
+-e --> to search multiple word in a file
+-c --> get the count value of particular word in a file
+-i --> to search for both capital and small word
+-n --> to display line nos before results
+-l --> to display filenames only in which pattern exits
+-v --> to print all lines except matched lines
+-o --> to print only matched patterns instead of total line
+-w --> to search exact word in a file
+
+
+search multiple content in the file
+-----------------------------------
+we have to use -e option which is extended
+
+grep -e 'linux' -e 'java' demo.txt subject.txt 
+
+get the count value of particular word in a file
+------------------------------------------------
+grep -c 'linux' demo.txt
+
+
+Search data by ignoring case
+----------------------------
+grep -i 'linux' demo.txt 
+
+Display line numbers before results
+-----------------------------------
+grep -n 'linux' demo.txt
+
+1:The most important subject is linux 
+3:the knowledge of linux is required everywhere 
+4:your father learn learn , linux now you required to learn Linux
+
+
+To display only filename in which pattern exist
+-----------------------------------------------
+we have to use -l option
+
+grep -l 'linux' *.txt	
+demo.txt
+subjects.txt
+
+To print all lines except matched line
+--------------------------------------
+-v option we have to use
+
+grep -v 'linux' demo.txt
+
+learning Linux is very easy
+java is programming language
+python is all rounder
+
+To search for exact word in the file
+------------------------------------
+grep 'linux' demo.txt
+grep -w 'linux' demo.txt
+
+
+Displaying before,after and surrounding lines including search result
+---------------------------------------------------------------------
+-A --> means after
+-B --> means before
+-C --> means before and after
+
+grep 'linux' abc.txt
+grep -A 2 'linux' demo.txt
+grep -B 2 'linux' demo.txt
+grep -C 2 'linux' demo.txt
+
+
+
+ NOTE: to search multiple word in a file we use -e option with grep , so instead of using -e option with grep we can
+       also use extended grep means egrep
+       
+egrep 'java|linux' demo.txt
+egrep -i 'java|linux' demo.txt ===> egrep command can understand this process
+grep 'java|linux' demo.txt ===> grep command can't understand this process
+
+egrep -n -i 'java|linux' demo.txt
+
+
+grep command always look for the match and not able to understand all regular expression
+egrep command can able to understand regular expression
+
+
+grep along with -e option
+-------------------------
+grep -e 'java' -e'python' -e'linux' demo.txt
+
+
+instead of -F we can use fgrep command
+
+
+Search multiple content on file
+-------------------------------
+we have to use -e option
+
+grep -e 'java' -e 'linux' demo.txt
+
+Instead of using -e option we can use egrep command
+egrep means extended grep
+
+
+egrep 'java|linux' demo.txt 
+
+
+
+grep command with -F option:	
+-----------------------------
+-F means fixed string
+if we want to search a group of fixed string then we should have to go for -F option
+
+grep along with -F option
+-------------------------
+
+grep -F "java	
+linux 
+python " demo.txt
+
+
+Instead of -F option we use fgrep command
+-----------------------------------------
+Fixed string global reg exp print 
+
+fgrep "java
+linux
+" subject.txt
+
+
+>>> fgrep command can understand patterns also --> no
+>>> we have to provide only fixed string
+
+
+grep VS egrep VS fgrep:
+-----------------------
+1. grep command can understand all patterns but not all patterns
+2. egrep (extended grep)can understand all patterns
+3. fgrep (fixed string grep) can not understand , It can accept only strings
+
+Note:
+egrep is most powerfull
+performace wise fgrep is too good
+
+
+demo.txt
+--------
+java
+python
+linux
+
+subject.txt
+-----------
+linux is good subject
+linux is very usefull subjects
+sometimes i feel linux is very difficult to learn
+java is programming language
+james gosling created java
+java is robust and secure
+java is multithreaded my nature
+java provide high level of exception handling
+python is alrounder
+python use for ML
+python is slow
+python created by guido van rossum
+
+$ fgrep -f demo.txt subject.txt
+
+
+fgrep ==> grep -F
+egrep ==> grep -e
+
+
+
+To print only matched pattern and not complete line
+---------------------------------------------------
+Use -o option
+
+grep -o 'linux' demo.txt
+
+
+Q. Write grep command to extract mobile nos from input file and write to mobile.txt
+-----------------------------------------------------------------------------------
+Ans:
+
+input.txt
+---------
+Hello this is shubham with mobile number 8840585165
+Hello this is shubham1 with mobile number 9838569722
+Hello this is pankaj with mobile number 7599101723
+Hello this is rekha with mobile number 6386055278	
+Hello this is rekha1 with mobile number 9415785811
+
+grep -o '[6-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' input.txt > mobile.txt	
+
+grep -o '[6-9][0-9]{9}' input.txt ===> this won't work because {9} can't be 
+                                       understandable by grep command but egrep command can
+                                       understand
+                                      
+egrep -o '[6-9][0-9]{9}' input.txt
+          
+To search in a file recursively inside a directory 
+--------------------------------------------------
+egrep -R 'java|linux' *    [sub dir files also will be considered]    
+egrep -i -R 'java|linux' * [this will search linux and java both in upper and lower case in 
+                           recursive way]                         
+                           
+                           
+NOTE : whenever we're using grep command for directories , compulsory we should use -R or 
+       -r option 
+        
+Assignment-1:
+-------------
+1. Save all running process information inside a file
+2. display all lines which contains 'lib' 
+3. display all lines which doesn't contain 'lib'
+4. count all lines where we are getting 'lib'
+5. display all lines which contain lib and preceding with lines no.s 
+6. display lines which doesn't contain lib , but only top 2 lines       
+         
+        
+        
+1. Save all running process information inside a file
+   ps -ef > abc.txt [save all running process inside a file]
+   
+2. display all lines which contains 'lib' 
+   grep 'lib' abc.txt
+   
+3. display all lines which doesn't contain 'lib'
+   grep -v 'lib' abc.txt
+	
+4. count all lines where we are getting 'lib'
+   grep -c 'lib' abc.txt
+
+5. display all lines which contain lib and preceding with lines no.s 
+   grep -n 'lib' abc.txt
+   	
+6. display lines which doesn't contain lib , but only top 2 lines       
+   grep -v 'lib' abc.txt | head -2         
+        
+Assignment-2:
+-------------
+
+emp.dat
+-------
+eno|ename|esal|eaddr|dept|gender
+100|sunny|1000|pune|admin|male
+200|bunny|2000|delhi|sales|female
+300|chinny|3000|pune|analyst|male
+400|munny|4000|delhi|admin|female
+500|dunny|5000|pune|sales|male        
+        
+        
+1. Display all employee belong to admin dept
+   grep 'admin' emp.dat
+   
+2. Display all employee belong to admin and sales dept 
+   egrep 'admin|sales' emp.dat
+           
+3. Display all male employee belong to admin and sales dept        
+   egrep 'admin|sales' emp.dat | grep 'male'       
+        
+        
+        
+Types of regular expression or pattern:
+---------------------------------------
+1. character pattern
+2. word pattern
+3. line pattern        
+        
+        
+1. character pattern:
+---------------------
+a. grep 'd*' demo.txt
+   it display all lines which contain 'd' followed by any name 	
+
+b. grep 'c[aeiou]ll' demo.txt
+
+c. grep 'b..l' demo.txt
+   . means any character , it will search for all 4 letter word where first letter 'b' 
+     should be compulsory and last letter should be '1'  
+
+2. word pattern:
+----------------
+grep -w 'linux' demo.txt
+
+\<word\> ==> it will always search for the given word
+\<xyz    ==> it will always search for the word start with xyz
+xyz\>    ==> it will always search for the word end with xyz
+
+number.txt
+----------
+1234
+123456
+6789
+67543
+12
+1
+
+grep '\<[0-9][0-9][0-9][0-9]\>' number.txt
+grep '\<[0-9][0-9]' number.txt
+grep '[0-9][0-9]\>' number.txt
+
+
+3. line pattern :       
+----------------        
+^ ---> line start with
+$ ---> line end with
+
+1. grep '^d' demo.txt
+   it will display all lines start with d character
+      
+2. grep '^\java\>' demo.txt  
+   it will display all lines start with java word
+        
+        
+        
+                  
+-----------------------------------------------------------------------------------
 
 
 
@@ -1720,6 +2082,9 @@ Topic-19: Grep Command:
 
 
 
+
+
+=====================================================================================================================
 
 Topic-20: CUT Command:
 ======================  	       	      	     
@@ -1807,163 +2172,6 @@ FILTERS
 10. fgrep
 11. egrep
 
-
-GREP COMMAND
--------------
-grep commands and various options
-
-search single content in file
------------------------------
-grep 'linux' demo.txt [search linux in demo.txt]
-
-search multiple content in the file
------------------------------------
-we have to use -e option which is extended
-
--e --> to search multiple word in a file
--c --> get the count value of particular word in a file
--i --> to search for both capital and small word
-
-searching particular word
---------------------------
-grep -e 'java' -e 'linux' demo.txt [searching for java and linux]
-
-search multiple word in a file
--------------------------------
-grep -e 'director' -e 'sales' emp1.lst
-
-get the count value of particular word in a file
------------------------------------------------
-grep -c 'director' emp1.lst
-
-list all files which are having this particular word
-----------------------------------------------------
-grep -l 'sales' *.lst [list all file which're having sales word]
-
-O/P:
-dept.lst
-emp1.lst
-emp.lst
-
-display file data excluding some word
-------------------------------------
-grep -v 'sales' emp1.lst
-
-
-grep wo[od][de]house emp.lst
-
-grep "true*man" emp.lst [print all those names which are having man in word before that anything can be allow]
-
-O/P: trueman
-     truman
-   
-grep wilco[cx*]k*s* emp
-
-NOTE : we use -e option to search multiple word in a file , but we can also use egrep command also which is extended grep 
-
-egrep 'java|linux' demo.txt [search java or linux in demo.txt]
-
-search for woodcock | woodhouse | wodehouse
---------------------------------------------
-egrep 'wo(o|d)(d|e)(house|cock)' emp.lst 
-
-search for capital and small both
------------------------------------
-egrep -i 'wo(o|d)(d|e)(house|cock)' emp.lst
-
-
-grep command always look for the match : "(java|linux)"
-grep command can understand patter or not --> yes but not all patterns
-
-grep 'linux' emp.lst [can understand by grep]
-grep 'linux|java' emp.lst [can't understand by grep can be understand by egrep]
-
-egrep command can understand all patterns
-like : 
-
->> '^linux' can understand by egrep
->> '(java|linux)' can understand by egrep
- 
-
-grep command with -F option:	
------------------------------
--F means fixed string
-if we want to search a group of fixed string then we should have to go for -F option
-
-grep -F "java	
-linux 
-python " demo.txt
-
-grep -e 'java' -e'python' -e'linux' demo.txt
-
-
-instead of -F we can use fgrep command
-
-
-fgrep means ---> fixed string global regular expression print 
-fgrep "java
-linux
-python" demo.txt
-
-
-fgrep command can understand pattern ?
---------------------------------------
-no we've to provide only fixed string .
-if we provide like this fgrep "java|python" demo.txt then fgrep didn't understand that java or python is regular 
-expression
-
-
-
-grep vs egrep vs fgrep
-------------------------
-1. grep command can understand but not all patterns
-   like this grep can undestand this pattern grep ja.. demo.txt [to display all string start with ja]
-   but grep can't understand this grep "java|python" demo.txt [to search either java or python string]
-   
-2. extended grep (egrep) can understand all patterns
-3. fixed string grep can't understand any patter , it can accept only fixed string
-
-NOTE:
-egrep is not powerfull
-fgrep was too good in performance wise
-fgrep means fast grep
-
-
-If we want to search some keyword which was present in file 1 and we want to search all those keyword in file2
----------------------------------------------------------------------------------------------------------------
-keyword.txt
-----------------
-java
-python
-linux
-
-grep.txt
---------
-java
-java is good
-j2se
-j2ee
-j2me
-
-linux is created by linus torvalds
-python created by guido van rossum
-java is created by james gosling
-c was created by dennis ritchie
-c++ was created by bjarne stroutsrup
-
-
-fgrep -f file1 file2
-fgrep -f keyword.txt grep.txt
-
-O/P: java
-     java 
-     linux 
-     python 
-     java 
-     
-     
-egrep ==> grep -e[this is recommended to use]
-fgrep ==> grep -F[this is recommended to use]
 
 
 SED
