@@ -9,28 +9,28 @@ Developer ===> Linux
 
 90% of real time application ===> Linux Platform
 
-Topic-1: Overview of UNIX/LINUX OS       DONE
-Topic-2: Linux File System 	        DONE
-Topic-3: Linux Installation  		DONE
-Topic-4: ls ,date,cal command   	DONE
-Topic-5: Working with directories	DONE
-Topic-6: Working with files 		DONE
-Topic-7: Comparing Files		DONE
-Topic-8: Creation of links		DONE
-Topic-9: Word Cound (WC Command)	DONE
-Topic-10: Sorting content of the file 	DONE
-Topic-11: Find unique content in the file by using uniq command 	DONE
-Topic-12: Input/Output redirection  				DONE
-Topic-13: Piping						DONE
-Topic-14: How to use multiple commands in a single file          DONE
-Topic-15: Command Alisaing 					DONE
-Topic-16: Regular Exression and wild card characters  		DONE
-Topic-17: Locate and Find Command				DONE
+Topic-1: Overview of UNIX/LINUX OS         					  DONE
+Topic-2: Linux File System 	        					  DONE
+Topic-3: Linux Installation  					 		  DONE
+Topic-4: ls ,date,cal command   				  		  DONE
+Topic-5: Working with directories						  DONE
+Topic-6: Working with files 							  DONE
+Topic-7: Comparing Files							  DONE
+Topic-8: Creation of links							  DONE
+Topic-9: Word Cound (WC Command)						  DONE
+Topic-10: Sorting content of the file 						  DONE
+Topic-11: Find unique content in the file by using uniq command 			  DONE
+Topic-12: Input/Output redirection  						  DONE
+Topic-13: Piping						 	 	  DONE
+Topic-14: How to use multiple commands in a single file          	  	  DONE
+Topic-15: Command Alisaing 					  		  DONE
+Topic-16: Regular Exression and wild card characters  				  DONE
+Topic-17: Locate and Find Command						  DONE
 Topic-18: Compression and Uncompression of files (tar,gzip,gunzip,bzip2,bunzip2)   DONE
-Topic-19: Grep Command					DONE
-Topic-20: Cut Command					DONE
-Topic-21: File Permission
-Topic-22: Working with editors
+Topic-19: Grep Command								  DONE
+Topic-20: Cut Command								  DONE
+Topic-21: File Permission							  DONE
+Topic-22: Working with editors   						  LEAVE
 Topic-23: Shell Scriptting and Shell Programming
 Topic-24: What is shell script and , sha-bang and first script
 Shell Variables
@@ -2106,45 +2106,63 @@ mv temp.txt demo.txt
    
 EGREP AND GREP Additional things
 --------------------------------
+Additional pattern supported by only egrep but not grep
 
+1. (|) it matched any of the thing in given string
+	egrep 'unix|java|python' demo.txt
+	
+2. {n} --> it matches exactly n occurence of preceesing characters
+	   egrep '[6-9][0-9]{9}' demo.txt
+	   
+	   
+3. {m,n} --> the preceding character can be considered minimum m times and maximum n times
+             egrep '[0-9]{1,5}' demo.txt
+             	   
+4. {m,}  --> the preceding character can be considered minimum m times and maximum n times and no restriction on 
+	     maximum times.
+	     egrep '[0-9]{3,}' demo.txt
+	     
+	     
+	     
+	  
+Q.1 write grep command to retrieve only date values present in the given input file where date values are in the   
+    form dd-mm-yyyy or dd/mm/yyyy   
+    
+input.txt
+---------
+Durga 28-05-1947
+Ravi  20-04-2005
+shiva 10-08-1995
+pawan 21-04-2008
+sdsdsdsdsdsdsds
+sgsgehrshbreshrehre
+hdfhbesarhedbhnerhrehrehbrh
+   
+  dd-mm-yyyy / dd/mm/yyyy
+    
+egrep '\<[0123][0-9][-/][01][0-9][-/][0-9]{4}\>' input.txt 
+or
+egrep -w -o '[0123][0-9][-/][01][0-9][-/][0-9]{4}' input.txt    
    
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+Q.2 Write a command to count the no of directory  
+------------------------------------------------       
+   ls -l | grep '^d' | wc -l
       
 [abc]  --> either a or b or c	
 [!abc] --> except a , b and c
 [^abc] --> either a or b or c       
 -----------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
 =====================================================================================================================
 
 Topic-20: CUT Command:
-======================  	       	      	     
+======================  
+-d --> means delimeter , which is seperator , the default delimeter is tab.
+-f --> meand filed 
+	       	      	     
 CUT COMMAND
 -----------
-we use cut command to extract data from file
-file can be normal or tabular file
-suppose if it is normal file
+we use cut command to extract data from file . file can be normal or tabular file . suppose if it is normal file
 
 2233|charles harris   |g.m        |sales      |12/12/52| 90000
 9876|bill johnson     |director   |production |03/12/50|130000
@@ -2166,11 +2184,11 @@ suppose if it is normal file
 
 1. Display character on the specific position in every record
 ----------------------------------------------------------------
-cut -c 9 emp.lst
+cut -c 9 emp.dat
      |-> -c mean't from 9th character position
     
 
-2. Display rance of character in every record
+2. Display range of character in every record
 ---------------------------------------------
 cut -c 5-9 emp.lst
 
@@ -2209,6 +2227,103 @@ cut -d "|" -f 2- emp.lst
 ------------------------
 cut -d "|" 1,3,5 emp.lst
  
+ 
+ 
+PASTE Command:
+==============  
+we can use paste command to join two or more files horizontally by using some delimeter . Default delimeter is tab
+
+paste file1.txt file2.txt file3.txt
+
+Subject.txt
+-----------
+core java
+advance java
+python 
+linux
+machine learning
+internet of things
+
+
+fee.txt
+-------
+1000
+2000
+999
+3500
+10000
+7000
+ 
+$ paste fee.txt subject.txt
+
+subject.txt
+-----------
+1000	core java
+2000	advance java
+999	python 
+3500	linux
+10000	machine learning
+7000	internet of things
+ 
+$ paste -d '-' fee.txt subject.txt  
+subject.txt
+-----------
+1000-core java
+2000-advance java
+999-python 
+3500-linux
+10000-machine learning
+7000-internet of things
+
+$ paste -d '---->' fee.txt subject.txt  
+
+Delimeter should be only one character . If we are providing more than one character then it will consider only 1st
+character
+
+tr Command:
+===========
+tr means translate , this command translate character by character
+
+
+
+1. tr 'aeiou' 'AEIOU' < demo.txt
+   
+   tr.txt
+   ------
+   upcoming software engineer not from IIT , NIT , IIM
+
+   $ tr 'aeiou' 'AEIOU' < tr.txt
+   UpcOmIng sOftwArE EngInEEr nOt frOm IIT , NIT , IIM
+   NOTE : it will translate lower case vowel to upper case vowel
+
+2. tr '[a-z]' '[A-z]' < demo.txt
+
+   tr.txt
+   ------
+   upcoming software engineer not from IIT , NIT , IIM
+   $ tr '[a-z]' '[A-z]' < demo.txt
+   UPCOMING SOFTWARE ENGINEER NOT FROM IIT , NIT , IIMs
+   NOTE : it will translate character to lower case to upper case
+	
+3. tr '|' '\t' < emp.dat
+   ------
+   eno	ename	esal	eaddr	dept	gender
+   ---  -----   ----    -----    ----   ------
+   100	sunny	1000	pune	admin	male
+   200	bunny	2000	delhi	sales	female
+   300	chinny	3000	pune	analyst	male
+   400	munny	4000	delhi	admin	female
+   500	dunny	5000	pune	sales	male  
+   
+   NOTE : gives tab
+
+4. tr -d 'a' < emp.dat
+   NOTE : delete all occurences of fa
+   	
+5. tr -d 'aeiou' < demo.txt
+   NOTE : delete all lower case vowels in emp.dat
+
+
 FILTERS
 
 ---------
