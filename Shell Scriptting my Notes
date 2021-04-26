@@ -2460,7 +2460,144 @@ chmod 621 demo.txt
 
 
 =====================================================================================================================
+Topic-23: Shell Scriptting and Shell Programming
+=================================================
+What is shell?
+--------------
+1. shell is responsibe to read command provided by user
+2. shell will check whether the command is valid or not
+3. shell will check whether the command is properly used or not
+4. if everything is proper then shell interprets (converts) that command into kernel understandable form and handover
+   that converted command to kernel
+   
+Kernel is reposnsible to execute that command with the help of hardware
+shell act as interface b/w user and kernel
+shell + kernel is nothing but operating system
 
+
+Types of shell:
+---------------
+1. Bourse shell
+2. BASH shell
+3. Korn shell
+4. CShell
+5. TShell
+6. ZShell
+
+1. Bourse shell:
+----------------
+It is developed by stephen bourne
+this is first which is developed for UNIX
+by using sh command we can access this shell
+
+2. BASH shell:
+--------------
+BASH==> Bourne Again Shell
+It is advance version of bourne shell
+default shell for most of linux flavour
+by using bash command we can access this shell
+
+3. Korn Shell:
+--------------
+It is developed by david korn
+by using ksh command we can access this shell
+
+4. Cshell:
+----------
+Developed by bill joy
+C meant for california university
+
+3. Korn shell
+4. CShell
+5. TShell
+6. ZShell
+
+
+How to check all available shell in our system:
+-----------------------------------------------
+/etc/shells
+
+
+How to switch to one shell to another shell:
+--------------------------------------------
+>> echo $0 [bash shell]
+>> sh
+   echo $0 [kourne shell]
+
+>> echo $0 [bash shell]
+   rbash 
+   echo $0 
+   
+
+
+
+What is shell script:
+---------------------
+a sequence of command saved to a file and this file is nothing  but shell script.
+programming feature also : control statements , loops , functions , arrays etc
+for complex requirement we can write our scripts very easily
+for automation task also we can write shell script
+
+
+
+How to write and run shell scripts:
+-----------------------------------
+1) write script
+
+test.sh
+-------
+echo "welcome to shell scripting"
+date 
+cal
+
+
+./test.sh       [internally bash shell used]
+sh ./test.sh    [interlally kourne shell used]
+rbash ./test.sh [internally rbash shell is used]
+
+Importance of Sha-Bang:
+-----------------------
+#! ----> Sha-Bang 
+by using sha-bang we can specify the interpreter (command) which is responsible to execute the script
+
+
+If we write shabang in our script , at that time of execution , we are not required to provide command to execute and
+we can execute script directly 
+./demo.sh
+
+write a python script and execute with and without sha-bang
+------------------------------------------------------------
+test.sh
+
+
+
+test.py
+------
+#! /bin/python3
+
+name=input('enter name : ')
+print(name)
+
+while running this program we don't need to write python3 test.py we just simply write ./test.py and program will run
+
+
+
+ 
+How to run our script from anywhere directly in our system just like a command:
+-------------------------------------------------------------------------------
+/home/durga/scripts ==> test.sh
+
+for any command or script by default our os will check location specified by PATH variable
+if we add our script location to PATH variable locations,then we can run our script just like a command from any where
+
+
+/home/daadestroyer/Desktop/LSS/scripts
+
+adding our working directory location to PATH variable
+------------------------------------------------------
+export PATH=$PATH:/home/daadestroyer/Desktop/LSS/scripts
+	 
+=====================================================================================================================
 
 SED
 ----
