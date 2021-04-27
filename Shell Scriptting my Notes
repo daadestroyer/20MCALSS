@@ -3151,12 +3151,161 @@ fi
 7. continue	
 8. exit
 
-=====================================================================================================================
+
+EXIT CODES / STATUS CODES
+-------------------------
+every command return some value after execution , which indicates that whether it is successfully executed or not .
+this return value is nothing but exit code or status code
+
+we can find exit code by using $?
+---------------------------------
+leaved this part
 
 
+FILE TEST OPTIONS:
+------------------
+-e --> returns true if file/directory exists
+
+Q. write a script to test whether the given file/directory exists or not?
+-------------------------------------------------------------------------
+#! /bin/bash
+
+read -p "Enter file name or directory name : " name
+if [ -e $name ]
+then 
+    echo "$name exits"
+else 
+    echo "$name not exists" 
+fi
 
 
+FILE TEST OPTIONS
+-----------------
+-e ---> return true if file/directory exists
+-f ---> return true if file is regular file
+-d ---> return true if file is directory
+-s ---> return true if file is non empty
+-z ---> return true is string is empty
+-r ---> return true if current user has read permission on the file
+-w ---> return true if current user has write permission on the file
+-x ---> return true if current user has execute permission on the file
+-o ---> return true if current user has owner permission on the file
 
+file1 -ot file2 --> return true if file1 is older then file2 (on the basis of last modified time)
+file1 -nt file2 --> return true if file1 is newer then file2 (on the basis of last modified time)
+
+
+write a script to test whether the given file is regular file or dir
+--------------------------------------------------------------------
+#! /bin/bash
+read -p "Enter filename to test : " fname
+if [ -e $fname ];then
+   if [ -f $fname ];then
+     echo "$fname is a regular file"
+   elif [ -d $fname ];then
+     echo "$fname is dir"
+   else 
+     echo "$fname is special file"
+  fi
+else
+   echo "$fname doesn't exist"
+fi
+  
+write a script that read a file name and display it content
+-----------------------------------------------------------
+file should exist
+file should be regular file
+the current user should has read access on that file
+
+#! /bin/bash
+read -p "enter file name : " name
+if [ -e $name]; then
+    if [ -f $name ]; then
+       if [ -r $name ]; then
+           echo "..............................."
+    	   cat $name
+    	   echo "..............................."
+        else 
+           echo "user not having read permission"
+        fi
+    else
+        echo "$name is not regular file"
+    fi
+else
+    echo "$name doesn't exist"
+fi
+
+
+write a script that read file name and check whether it is empty or not
+-----------------------------------------------------------------------
+-s --> return true if the file name is non empty    
+
+#! /bin/bash
+read -p "enter file name : " name
+if [ -e $name]; then
+    if [ -f $name ]; then
+	if [ -s $name ]; then
+	    echo "$name is non empty file"
+	else
+	    echo "$name is empty file"
+	fi
+    else
+        echo "$name is not regular file"
+    fi
+else
+    echo "$name is not exist"
+fi   	
+
+
+write a script to read file name or dir name and remove that file/dir
+----------------------------------------------------------------------
+it is availabel or not -e	       
+
+#! /bin/bash
+read -p "enter file name : " name
+if [ -e $name]; then
+	rm -rf $name
+	echo "file removed"
+else
+    echo"$name doesn't exist"
+
+write a script to read file name and display user permission
+------------------------------------------------------------
+
+#! /bin/bash
+read -p "enter file name to display user permission : " name
+echo "******user permission summary******"
+if [ -r $name]; then
+   echo "READ PERMISSION : YES"
+else 
+   echo "READ PERMISSION : NO"
+fi
+if [ -w $name]; then
+   echo "WRITE PERMISSION : YES"
+else 
+   echo "WRITE PERMISSION : NO"
+fi
+if [ -x $name]; then
+   echo "EXECUTE PERMISSION : YES"
+else 
+   echo "EXECUTE PERMISSION : NO"
+fi
+
+
+write a script to check 2 file having same content or not
+----------------------------------------------------------
+
+
+#! /bin/bash
+read -p "enter file name 1 : " name1
+read -p "enter file name 2 : " name2
+res=$(cmp $name1 $name2)
+
+if [ -z "$res" ];  then
+    echo "the gives two file having same content"
+else
+    echo "the given to file having different content"	 
+==================================================================================================================
 SED
 ----
 SED command in UNIX is stands for stream editor and it can perform lot’s of function on file like, searching, find and replace, insertion or deletion. SED command in UNIX is stands for stream editor and it can perform lot’s of function on file like, searching, find and replace, insertion or deletion. By using SED you can edit files even without opening it,  which is much quicker way to find and replace something in file, than first opening that file in VI Editor and then changing it.
