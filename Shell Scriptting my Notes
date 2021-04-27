@@ -31,43 +31,42 @@ Topic-19: Grep Command								  DONE
 Topic-20: Cut Command								  DONE
 Topic-21: File Permission							  DONE
 Topic-22: Working with editors   						  LEAVE
-Topic-23: Shell Scriptting and Shell Programming
-Topic-24: What is shell script and , sha-bang and first script
-Shell Variables
-Variable substitution and command substitution
-Command Line Arguements
-How to read dynamic data from the user
-Operators
-Control Statements
-Arrays
-Shell script functions
-Project on shell scriptting 
-Stream Editor(SED)
-AWK Programming 
+Topic-23: Shell Scriptting and Shell Programming			    	  DONE 
+Topic-24: What is shell script and , sha-bang and first script			  DONE
+Topic-25:Shell Variables									  DONE
+Topic-26:Variable substitution and command substitution					  DONE	
+Topic-27:Command Line Arguements								  DONE
+Topic-28:How to read dynamic data from the user						  DONE	
+Topic-29:Operators									  DONE	
+Topic-30:Control Statements								  DONE	
+Topic-31:Arrays										  DONE	
+Topic-32:Shell script functions								  DONE
+Topic-33:Project on shell scriptting 
+Topic-34:Stream Editor(SED)
+Topic-35:AWK Programming 
+
 Project on AWK Programming
 
 Linux Administration Basics
 ---------------------------
-Job Scheduling with crontab
-User Mangement 
-Working with putty,Mobaxterm,XShell
-How to customize open source software code
-Process Management
-Communication Commands (write,wall,msg,mail)
-
-
-How to use gmail from ubuntu terminal to send email
-Package Management
-Install and Working with MYSQL Database
-Working with Java
-Job Control
-nohup command
-at command
-Memory related command
-networking commands
-working with winscp
-working with filezilla
-init command 
+Topic-36:Job Scheduling with crontab
+Topic-37:User Mangement 
+Topic-38:Working with putty,Mobaxterm,XShell
+Topic-39:How to customize open source software code
+Topic-40:Process Management
+Topic-41:ommunication Commands (write,wall,msg,mail)
+Topic-42:How to use gmail from ubuntu terminal to send email
+Topic-43:Package Management
+Topic-44:Install and Working with MYSQL Database
+Topic-45:Working with Java
+Topic-46:Job Control
+Topic-47:nohup command
+Topic-48:at command
+Topic-49:Memory related command
+Topic-50:networking commands
+Topic-51:working with winscp
+Topic-52:working with filezilla
+Topic-53:init command 
 topmost important linux questions
 
 
@@ -2585,7 +2584,7 @@ while running this program we don't need to write python3 test.py we just simply
  
 How to run our script from anywhere directly in our system just like a command:
 -------------------------------------------------------------------------------
-/home/durga/scripts ==> test.sh
+/home/daadestroyer/scripts ==> test.sh
 
 for any command or script by default our os will check location specified by PATH variable
 if we add our script location to PATH variable locations,then we can run our script just like a command from any where
@@ -2593,11 +2592,570 @@ if we add our script location to PATH variable locations,then we can run our scr
 
 /home/daadestroyer/Desktop/LSS/scripts
 
-adding our working directory location to PATH variable
+Adding our working directory location to PATH variable
 ------------------------------------------------------
+1. Session Level	
+----------------
 export PATH=$PATH:/home/daadestroyer/Desktop/LSS/scripts
 	 
+2. Setting PATH Permanent at user level
+---------------------------------------
+.bashrc file is there in /home/daadestroyer directory which will execute everytime when terminal started 
+
+/home/daadestroyer/.bashrc
+ 
+	
+Variables:
+==========
+variables are placeholder to hold values
+x=10
+PATH=/home/daadestryer/Desktop/LSS/scripts
+
+variables are key-value pairs
+
+int x=10;  --> statically typed language [c,c++,java]
+x=10  	   --> dynamically typed language [python]
+
+In shell programming , there are no data types , every value is treated as text type/string type
+
+All variables are defined into 2 types:
+---------------------------------------
+1. predefined variable/environment variable
+2. user defined variable
+
+
+1. predefined variable/environment variable:
+--------------------------------------------
+these variable are mostly used by system internally . system variables . but based on our requirement we can use in
+our script also
+
+we can get all environment variables information by using 
+env command 
+set command 
+
+
+2. User defined variable:
+-------------------------
+1. Based on our programming requirement , we can define our own variables also.
+2. It is highly recommended to use UPPER CASE characters
+
+GUEST=dhoni
+echo "Hello $GUEST you are my hero"
+
+
+3. If multiple words are there then these words should be seperated with _ symbol
+
+like MOBILE_NUMBER , USER_NAME etc..
+
+4. Variable name should not start with digit
+ex. TOTAL123=10 (corrent)
+    123TOTAL=10 (wrong)
+    
+5. We should not use special symbols -,@,#,$,%
+6. How to define read only variable
+   ex.. 
+   A=10
+   readonly A
+   echo $A
+   A=100
+   bash: age: readonly variable
+
+
+Variable scopes:
+----------------
+There are three scopes are available for variables
+
+1. Session Scope
+-----------------
+the variable which are declared inside terminal are said to be in session scope , once we close the terminal all 
+variable by default will be gone
+
+2. User Scope
+--------------
+for every user in the user home directory one special file is there which .bashrc 
+the variable which are decalred inside .bashrc file are said to be user scope variable and that are accessible to that particular user only
+
+user scope variable are not available for other user
+sudo --> super user do
+su   -->
+
+3. System Scope
+---------------
+
+
+NOTE : to reflect user scoped variables we have to restart out terminal
+       to reflect system scoped variables we have to restart our system
+       
+       system scope > user scope > session scope
+
+
+
+
+
+Variable Substitution:
+----------------------
+Accessing the value of a variable by using $symbol is called variable substitution
+
+Syntax : 
+--------
+$variable_name
+or
+${variable_name}
+
+echo $x
+
+
+COMMAND SUBSTITUTION:
+=====================
+Execute command and substitute its result 
+
+Syntax:
+-------
+old style `command`   back quotes but not single quote
+new style $(command)  
+
+eq:1 To display today date
+     date ===> will display both date and time
+     date +%D ==> will display date but not time
+     date +%T ==> will display time but not date
+     
+     
+echo "Today date is : `date +%D`"
+echo "Today date is : $(date +%D)"
+
+
+eg:2 to print no of files present in current working directory
+
+ls -l | wc
+
+echo "the no of files present in current working dir : `ls -l | wc`"
+echo "the no of files present in current working dir : $(ls -l | wc)"
+
+
+COMMAND LINE ARGUMENTS:
+========================
+The arguments which are passing from command prompt are called command line arguments
+
+
+./test.sh 10 20 30 40 [10,20,30,40 are the arguments passed for a file test.sh]
+test.py 10 20 30 40 [10,20,30,40 are the arguments passed for a file test.py]
+
+./test.sh learning linux is very easy
+$# ----> number of arguments (5)
+$1 ----> first argument (learning)
+$2 ----> second argument (linux)
+$3 ----> third argument (is )
+$4 ----> fourth argument (very)
+$5 ----> fifth argument (easy)
+$* ----> all arguments (learning linux is very easy)
+$@ ----> all arguments (learning linux is very easy)
+$? ----> exit code of the previously ex	ecuted command or script
+
+
+IFS="-"
+echo "all arguments with * : $*"
+
+main purpose of command line arguments:
+---------------------------------------
+we can customize behaviour of the script based on our arguments 
+
+
+test.sh
+-------
+#! /bin/bash
+
+APPLE
+echo "APPLE" | wc -c 
+
+
+
+write a script to create log file with timestamp:
+-------------------------------------------------
+#! /bin/bash
+date +%d_%m_%Y_%H_%M_%S
+
+
+
+READ DYNAMIC DATA FROM KEYBOARD:
+==========
+By using read keyword we can read dynamic data entered by user
+
+
+without promt message:
+----------------------
+read a b
+10 20 
+echo $a $b
+
+with prompt message:
+--------------------
+Approach:1
+----------
+echo "Enter A value"
+read A
+echo "Enter B value"
+read B
+echo "A value is $A"
+echo "B value is $B"
+
+Approach:2
+----------
+echo "Enter A value : " [statement-1]
+read A                  [statement-2]
+
+read -p "Enter User Name : " user [-p means prompt message]
+read -s -p "Enter password : " password [-s means secure input/hidden input]
+
+
+#! /bin/bash
+read -p "Enter student name : " name
+read -p "Enter student roll no : " rollno
+read -p "Enter student marks : " marks
+echo "Please confirm your details"
+echo "..........................."
+echo "Student Name : $name"
+echo "Student Rollno : $rollno"
+echo "Student Marks : $marks"
+
+
+Write a script to read a file name from the end user and display its content?
+-----------------------------------------------------------------------------
+#! /bin/sh
+read -p "Enter any file name to display its content : " fname
+
+echo "........................"
+cat $fname
+echo "........................"
+
+
+Write a script to read file name from the end user and remove blank lines present in that file
+----------------------------------------------------------------------------------------------
+remove_blankspace.sh
+--------------------
+#! /bin/bash
+read -p "enter file name " filename
+grep -v "^$" $filename
+
+
+
+Write a script to read file name from user and remove duplicate lines from that file
+------------------------------------------------------------------------------------
+sunny
+bunny
+chinny
+vinny
+sunny
+bunny
+chinny
+vinny
+
+sort -u duplicate.txt
+
+sunny
+bunny
+chinny
+vinny
+
+#! /bin/bash
+read -p "enter any filename to remove duplicate lines : " fname
+sort -u $fname > temp.txt
+temp.txt > fname
+echo "In $fname file all duplicate lines are removed ...."
+
+
+
+
+OPERATORS:
+==========
+symbol --> to perform a particular activity
+
+1. Arithmetic Operators
+-----------------------
++  --> addition
+-  --> substraction
+*  --> multiplcation
+/  --> division
+%  --> modulo
+
+2. Relational Operator(numeric comparison operator)
+---------------------------------------------------
+-gt ---> greater than
+-ge ---> greater than or equal to
+-lt ---> less than
+-le ---> less than or equal to
+-eq ---> equal to
+-ne ---> not equal
+
+These opearator return boolean value that is true or false
+
+
+3. Logical Operator
+--------------------
+-a ---> logical ANS
+-o ---> logical OR
+!  ---> logical NOT
+
+
+4. Assignment Operator
+----------------------
+=
++=
+-=
+
+
+How to perform mathematical operations
+--------------------------------------
+There are multiple ways to perform mathematical operations
+
+1. by using `expr` keyword
+2. by using `let` keyword
+3. by using (()) parantheses
+4. by using square bracket
+
+1. by using `expr` keyword
+---------------------------
+expr means expression and it is a keyword
+
+sum=`expr $a + $b`
+or
+sum=$(expr $a + $b)
+
+
+while using expr keyword , $ symbol is mandatory.
+space must be required before and after + symbol
+
+2. by using `let` keyword
+--------------------------
+let sum = $a + $b
+or
+let sum = a + b
+
+while let keyword $ symbol is not mandatory(optional)
+space is not required before and after + symbol
+
+3. by using (()) parantheses
+----------------------------
+let sum = (($a + $b))
+echo $sum
+
+4. by using square bracket []
+-----------------------------
+sum=$[$a + $b]
+echo "this is sum : $sum"
+
+OR
+
+sum=[a+b]
+echo "this is sum : $sum"
+
+in this case also both $ and space are optional
+
+NOTE : ALL THERE 4 APPROACHES ARE ONLY WORK FOR INTEGER NUMBER
+       FOR FLOATING POINTS CALCULATION GO FOR BC COMMAND
+       
+
+bc command
+----------
+bc --> binary calculator
+
+from terminal we can start bc by using bc command directly
+
+A=10
+B=20
+
+echo "the difference of A and B is : $($A-$B | bc)"
+echo "the product of A and B is : $($A*$B | bc)" 
+echo "the division of A and B is : $($A/$B | bc)"
+
+
+
+Write a script to read 4-digit no and print sum of digits
+---------------------------------------------------------
+1234 ==> 10
+731  ==> 10
+
+
+#! /bin/bash
+read -p "enter 4 digit integer no : " n
+a=$(echo $n | cut -c 1)
+b=$(echo $n | cut -c 2)
+c=$(echo $n | cut -c 3)
+d=$(echo $n | cut -c 4)
+let sum=a+b+c+d
+
+
+CONTROL STATEMENTS:
+===================
+The statments which control execution from at runtime are called control statements
+
+if condition
+ 	commands
+else	
+	commands
+	
+1. if statemenet
+-----------------
+simple if syntax
+----------------
+if [ condition ]
+then 
+    action
+fi
+
+if condition is true then only action is executeds
+
+write a script to take name from end user and if name is sunny then display some  special message	
+-------------------------------------------------------------------------------------------------
+x=10 ==> works as assignment operator
+x = 10 ==> works as comparison operator
+
+#! /bin/bash
+read -p "Enter your name : " name
+if [ $name = "sunny" ]
+then	
+   echo "Hello sunny very very good eveninig"
+fi
+   echo "How are you"
+
+
+
+OP: if name is sunny op is ==> hello sunny very very good evening
+    if name is not sunny   ==> how are you	 
+
+alternative syntax
+------------------
+if [ condition ]; then
+      action
+fi
+
+read -p "Enter your name : " name
+if [ $name = "sunny" ];then	
+   echo "Hello sunny very very good eveninig"
+fi
+   echo "How are you"
+
+2. if else
+----------
+if [ condition ]
+then 
+    action if condition is true
+else 
+    action if condition is false
+fi
+
+#! /bin/bash
+
+read -p "Enter your name : " name
+if [ $name = "sunny" ]
+then	
+   echo "Hello sunny very very good eveninig"
+else
+   echo "Hello guest good eveninig"
+fi
+   echo "How are you"
+
+if name is sunny :  Hello sunny very very good eveninig
+		    How are you
+if not           :  Hello guest good eveninig
+		    How are you
+		    
+		    
+3. nested if
+------------
+if [ condition ]
+then 
+    ...some statement...
+    if [ condition-1]
+    then 
+        ...some statment...
+    else
+        ................
+    fi
+     ...some statement...
+fi
+    
+4. laddder if
+-------------
+if [ condition-1 ]
+then
+   action-1
+elif [ condition-2 ]
+then
+   action-2
+elif [ condition-3 ]
+   action-3
+else
+   default section
+fi
+
+
+write a script to check whether number are equal or not . if number are not equal then print greater number
+-----------------------------------------------------------------------------------------------------------
+Both number are equal
+first no is greater then second number
+first no is smaller then second number
+
+#! /bin/bash
+read -p "Enter first number : " a
+read -p "Enter second number : " b
+
+if [ $a -eq $b ]
+then
+    echo "both no are equal"
+elif [ $a -gt $b ]
+then 
+    echo "$a is greater then $b"
+else	
+then 
+    echo "$a is smaller then $b"
+fi
+    echo "ending..."
+
+write a script to find greater of three no
+------------------------------------------
+#! /bin/bash
+read -p "Enter first number : " a
+read -p "Enter second number : " b
+read -p "Enter third number : " c
+if [ $a -gt $b ] 
+  then
+  if [ $a -gt $c ]
+  then
+     echo "biggest no is $a"
+  else
+     echo "biggest no is $c"
+  fi
+elif [ $b -gt $c ]
+then
+     echo "biggest no is $b"
+else
+     echo "biggest no is $c"
+fi
+
+
+write a script to find even no or not
+---------------------------------------
+#! /bin/bash
+read -p "Enter number : " num
+if [ $[num%2] -eq 0 ] 
+then
+    echo "$num is even"
+else
+    echo "$num is odd"
+fi
+
+
+
+5. untill loop
+6. break
+7. continue	
+8. exit
+
 =====================================================================================================================
+
+
+
+
 
 SED
 ----
