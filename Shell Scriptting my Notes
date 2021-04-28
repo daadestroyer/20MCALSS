@@ -33,14 +33,14 @@ Topic-21: File Permission							  DONE
 Topic-22: Working with editors   						  LEAVE
 Topic-23: Shell Scriptting and Shell Programming			    	  DONE 
 Topic-24: What is shell script and , sha-bang and first script			  DONE
-Topic-25:Shell Variables									  DONE
-Topic-26:Variable substitution and command substitution					  DONE	
-Topic-27:Command Line Arguements								  DONE
-Topic-28:How to read dynamic data from the user						  DONE	
-Topic-29:Operators									  DONE	
-Topic-30:Control Statements								  DONE	
-Topic-31:Arrays										  DONE	
-Topic-32:Shell script functions								  DONE
+Topic-25:Shell Variables						          DONE
+Topic-26:Variable substitution and command substitution			          DONE	
+Topic-27:Command Line Arguements						  DONE
+Topic-28:How to read dynamic data from the user					  DONE	
+Topic-29:Operators								  DONE	
+Topic-30:Control Statements							  DONE	
+Topic-31:Arrays								          DONE	
+Topic-32:Shell script functions							  DONE
 Topic-33:Project on shell scriptting 
 Topic-34:Stream Editor(SED)
 Topic-35:AWK Programming 
@@ -3294,8 +3294,6 @@ fi
 
 write a script to check 2 file having same content or not
 ----------------------------------------------------------
-
-
 #! /bin/bash
 read -p "enter file name 1 : " name1
 read -p "enter file name 2 : " name2
@@ -3305,6 +3303,639 @@ if [ -z "$res" ];  then
     echo "the gives two file having same content"
 else
     echo "the given to file having different content"	 
+    
+    
+    
+    
+    
+    
+STRING TEST OPTION:
+-------------------
+1. str1 = str2   ----> return true if both the string are same
+2. str1 != str2  ----> return false if both the string are different
+3. -z str        ----> return true if the string is empty
+4. -n str        ----> return true if the string is non empty
+5. str1 > str2   ----> return true if str1 alphabetically greater than str2
+6. str1 < str2   ----> return true if str1 alphabetically less than str2
+ 
+ 
+CASE STATEMENT:
+---------------
+like switch statement in java 
+if multiple options are available then it is not recommended to use if-elif-else statement . It increases length
+of the code and reduces readablity
+
+syntax:
+-------
+case $variable in
+	option 1 )
+		action-1
+		;;
+	option 2 )
+		action-2
+		;;
+	option-n )
+		action-n
+		;;
+	* )
+		default action
+		;;
+esac
+
+
+conclusion:
+-----------
+1. option1 ) this space is optional
+   option1)
+   
+2. ;; can be used to come out of case statement
+3. ;; this is mandatory but for default option it is optional
+   
+   
+------- 
+some part is left
+-------
+
+
+
+ITERATIVE STATMENETS:
+=====================
+If we want to execute a group of commands multiple times then we should go for iterative statements.
+
+3 types of iterative statements:
+--------------------------------
+1. while loop
+2. until loop
+3. for loop
+  
+1. while loop
+-------------
+while [ condition ]
+do 
+     body
+done
+
+
+as long as condition is true , then body will be executed . Once condition fails then only loop will be terminated
+
+
+
+Q. write a script to print no 1-10 
+-----------------------------------
+#! /bin/bash
+i=1
+while [ $i -le 10 ]
+do
+  echo $i
+  let i++
+done
+
+
+Q. write a script to generate no until some limit which is provided by end user
+-------------------------------------------------------------------------------
+#! /bin/bash
+read -p "enter limit : " n
+while [ $i -le n ]
+do
+  echo $i
+  i=$[i+1]
+done
+
+sleep command:
+--------------
+if we don't want to perform any operation for a particular amount of time (i.e just pausing is required)then we 
+should go for sleep command . The argument to the sleep command is seconds
+
+eg:
+sleep 1
+sleep 2
+sleep 3
+sleep 4
+sleep 0.5
+sleep 0.5
+
+Q. write a script to display timer on the terminal(digital timer)
+-----------------------------------------------------------------	
+#! /bin/bash
+while [ true ]
+do
+  clear
+  echo "\n\n\n\n\t TIME IS : $(date +%H:%M:%S)"
+  sleep 1
+done
+
+
+BREAK AND CONTINUE:
+-------------------
+break
+------
+based on some condition if we want to break loop exuection (i.e to come out of loop) then we should go for break 
+statememt
+
+#! /bin/bash
+i=1
+while [ $i -le 10 ]
+do
+  if [ $i -eq 5]; then
+     break
+  fi
+  echo $i
+  let i++	
+done
+
+
+continue
+---------
+while [ condition ] 
+do
+  statement-1
+  statement-2 
+  statement-3
+  if [ $i -eq 5 ]
+     continue
+  statement-4
+  statement-5
+done
+
+#! /bin/bash
+i=0
+while [ $i -lt 10 ]
+do
+  let i++
+  if [ $[i%2] -eq 0 ];then
+  	continue
+  fi
+  echo $i
+done
+
+
+Q. write a script to read filename and display its content
+-----------------------------------------------------------
+#! /bin/bash
+
+while [ true ]	
+do
+ read -p "enter filename to display its content : " fname
+ # check whether filename is exit or not and whether it is a regular file or not
+ 
+ if [ -f $fname ]; then 
+    echo "content of $fname is : "
+    echo "..................................."
+    cat 	$fname
+    echo "..................................."
+  else
+    echo "$fname is not exist or it may not regular file"
+  fi
+  read -p "do you want to display content of another file [yes/no] : " option
+  case $option in
+     [yY]|[eE]|[sS])
+        continue
+        ;;	
+     [nN]|[oO])
+     	break
+        ;;
+        
+ esac
+done	
+
+
+
+Q. write a script to find reverse of string
+-------------------------------------------
+#! /bin/bash
+
+read -p "enter any string to find reverse : " str
+len=$(echo -n $str | wc -c)
+output=""
+while [ $len -ge 1]
+do
+  ch=$(echo n $str | cut -c $len)
+  $output=$output$ch
+  let len--
+done
+echo "original string : $str"
+echo "reversed string : $output" 
+
+
+Q. Write a script to read employee data and insert into emp.txt file
+--------------------------------------------------------------------
+#! /bin/bash
+while [ true ]
+do 
+  read -p "Enter employee number : " eno
+  read -p "Enter employee name : " ename
+  read -p "Enter employee salary: " esal
+  read -p "Enter employee address : " eaddr	
+  echo "$eno:$ename:$esal:$eaddr" >> emp.txt
+  echo "employee record inserted successfully..."
+  read -p "Do you need to enter one more records [yes/no]: " opt
+  case $option in
+     [yY]|[eE]|[sS])
+     continue
+     ;;
+     [nN]|[oO]
+     break
+     ;;
+ esac
+done
+echo
+         
+2. until loop
+-------------
+As long as condition is true the body will be executed . Once condition returns false then loop will be terminated 
+
+untill [ condition ]
+do 
+  body
+done
+
+as long as condition is false the body will be executed , once condition return true then only the loop is terminated
+hence untill loop is opposite to while loop
+
+
+
+Q. write a script to write 1-5 using untill loop
+-----------------------------------------------
+#! /bin/bash
+
+i=1
+untill [ $i -gt 5 ]
+do 
+  echo "$i"
+  let i++
+done
+
+	 
+3. for loop
+-----------    
+java --> for-each loop / enhanced for loop
+python --> for loop
+
+
+syntax:
+-------
+for variable in item1 item2 item3 ... itemN
+do
+  action
+done
+
+Q. to print no from 1-5
+-------------------------
+#! /bin/bash
+for i in 1 2 3 4 5
+do
+  echo "current no is $i"
+done
+
+Q. print those no b/w 1-100 which are divisible by 10
+------------------------------------------------------
+#! /bin/bash
+
+for num in {1..100}
+do
+  if [ $[num % 10] -eq 0 ]; then
+     echo "$num"
+  fi
+done
+
+
+Q. print all file name present in current working dir
+-------------------------------------------------------
+#! /bin/bash
+
+for name in *
+do 
+  if [ -f $name ]; then
+     echo $name
+  fi
+done
+
+Q. write date and cal value in every .txt file present in current working dir
+-----------------------------------------------------------------------------
+#! /bin/bash
+
+for fname in /home/daadestroyer/Desktop/*.txt
+do 
+  date >> $fname
+  cal >> $fname
+done
+      
+    
+    
+Q. write a script to print all employee information whoose salary is greater than 2500 
+---------------------------------------------------------------------------------------
+emp.txt
+-------
+100:sunny:10000:delhi
+200:bunny:20000:hyderabad
+300:chinny:30000:bangalore
+400:vinny:40000:gurgaon
+
+#! /bin/bash
+for record in $(cat emp.txt)
+do 
+  sal=$(echo $record | cut -d ":" -f3)
+  if [ $sal -gt 2500 ]; then
+      echo $record 
+  fi
+done    
+    
+Q. write a script to save all employee to different file where emp sal > 2500 and city = gurgaon
+------------------------------------------------------------------------------------------------    
+emp.txt
+-------
+100:sunny:10000:delhi
+200:bunny:20000:hyderabad
+300:chinny:30000:bangalore
+400:vinny:40000:gurgaon
+
+#! /bin/bash
+for record in $(cat emp.txt)
+do 
+  sal=$(echo $record | cut -d ":" -f3)
+  city=$(echo $record | cut -d ":" -f4)
+   if [ $sal -gt 2500 -a $city = "gurgaon" ]
+     echo $record >> det.txt  
+   fi
+done    
+echo "task completed..."
+    
+    
+Q. print max sal emp details
+----------------------------
+emp.txt
+-------
+100:sunny:10000:delhi
+200:bunny:20000:hyderabad
+300:chinny:30000:bangalore
+400:vinny:40000:gurgaon
+
+#! /bin/bash
+minsal=$(cat emp.txt | head -1 | cut -d ":" -f3)
+maxsal=$(cat emp.txt | head -1 | cut -d ":" -f3)
+
+for record in $(cat emp.txt)
+do
+  sal=$(echo $record | cut -d ":" -f3)
+  if [ $sal -gt $maxsal ]; then
+    maxsal=$sal
+  fi
+  if [ $sal -lt $minsal ]; then
+    minsal=$sal
+  fi
+done
+echo "min sal : $minsal"
+echo "max sal : $maxsal"	
+    
+    
+ADVANCE FOR LOOP:
+=================
+Q.1 write a script to print 0-4 by using advance for loop:
+----------------------------------------------------------
+#! /bin/bash
+for (($i=0; $i<5; $i++))
+do
+  echo $i
+done
+
+Q.2 write a script to print no in decreasing order:
+---------------------------------------------------
+#! /bin/bash
+read -p "enter no : " num
+for (($i=$num; $i>num; $i--))
+do
+  echo $i
+done
+
+
+
+
+ARRAYS:
+=======
+the main advantage of array is : we can represent multiple values with a single variable , so that the lenght of the 
+code will be reduced and readablity will be improved
+
+How to create arrays
+---------------------
+declare -a courses
+courses=("java","python","linux")
+courses=(java python linux)
+
+courses[0]=java
+courses[1]=python
+
+course[100]=dsa
+course[120]=react
+
+the index values need not to be consecutive . we can take randomly 
+
+
+How to access array elements
+----------------------------
+we can access array elements by using index which is zero based . The index of first element is zero
+
+${courses[0]}---> first element
+${courses[1]}---> second element
+${courses[@]}---> all elements present in the array with space seperator
+${courses[*]}---> all elements present in the array with space seperator by first character of IFS(internal field
+seperator).
+
+${!courses[@]}---> return all indices where elements are available
+${#courses[@]}---> return elements are SED
+${#courses[0]}---> return length of first elements 
+
+
+test.sh
+#! /bin/bash
+courses[0]=java
+courses[1]=python
+courses[2]=go
+courses[3]=ruby
+courses[4]=js
+courses[5]=php
+
+echo "first element : ${courses[0]}"
+echo "second element : ${courses[1]}"
+echo "all elements with @  ${courses[@]}"
+echo "all elements with *  ${courses[*]}"
+echo "the indices where elements are available : ${!courses[@]}"
+echo "total number of elements : ${#courses[@]}"
+echo "length of first elements : ${#courses[0]}"
+
+
+Q. write a script to create array and print all its element using while loop or for loop
+-----------------------------------------------------------------------------------------
+#! /bin/bash
+declare -a fruits
+fruits=("apple","banana","mango")
+echo "all elements by using while loop"
+i=0
+while [ $i -lt ${#fruits[@]} ]
+do 
+ echo ${fruits[$i]}
+ let i++
+done
+
+
+using normal for loop
+----------------------
+for fruit in ${fruits[@]}
+do 
+  echo $fruit
+done
+
+using advance for loop
+----------------------
+for ((i=0;i<${fruits[#@]};i++))
+do
+  echo ${fruits[i]}
+done
+
+
+Q. write a script to store n values in array
+--------------------------------------------
+#! /bin/bash
+read -p "enter size of array : " n
+for((i=0;j=1;i<n;i++))
+do 
+  read -p "enter the number-$[j++]: NUM[$i]"
+done
+echo "array elements are : ${NUM[@]}"  
+
+Q. sum of even and odd no present in array
+-------------------------------------------
+#! /bin/bash
+decalre -a NUM
+NUM={1,2,3,4,5,6,7,8,9,10}
+esum=0
+osum=0
+for val in ${NUM[@]}
+do
+  if[ $[val%2] -eq 0 ]; then
+     let esum=esum+val
+  else
+     let odum=osum+val
+  fi
+ done
+echo "even sum : $esum"
+echo "odd sum : $osum"
+
+
+Q. write a script to store all .txt file names present in current working directory and print permission of every file
+---------------------------------------------------------------------------------------------------------------------
+#! /bin/bash
+
+files=($(ls *s.txt))
+for fname in ${files[@]}
+do 
+ echo -ne "$fname:\t"
+ if [ -r $fname ]; then
+    echo -ne "READ(Y)\t"
+ else
+    echo -ne "READ(N)\t"
+ fi
+ if [ -w $fname ]; then
+    echo -ne "WRITE(Y)\t"
+ else
+    echo -ne "READ(N)\t"
+ fi
+ if [ -x $fname ]; then
+    echo -ne "EXECUTE(Y)\t"
+ else
+    echo -ne "EXECUTE(N)\t"
+ fi
+done
+
+while echo command and \t it is mandatory to use -ne
+ 
+abc.txt READ(Y)  WRITE(N) EXECUTE(N) 
+abc.txt READ(Y)  WRITE(N) EXECUTE(N)
+abc.txt READ(Y)  WRITE(N) EXECUTE(N)
+abc.txt READ(Y)  WRITE(N) EXECUTE(N)
+abc.txt READ(Y)  WRITE(N) EXECUTE(N)
+
+
+
+SHELL SCRIPT FUNCTIONS:
+-----------------------
+if any group of commands are seperatly required , then it is not recommended to write these commands seperatly everytime because it increases length of the code and reduces readablity 
+
+How to define a function:
+------------------------
+function_name()
+{
+
+}
+
+How to call function:
+---------------------
+function_name param1 param2 param3 param4
+#! /bin/bash
+f1()
+{
+	A=10
+	B=20
+	echo $[A+B]
+	echo $[A-B]
+	echo $[A*B]
+	echo $[A/B]
+}
+
+
+f1 10 100
+f1 100 200 300
+f1 100 200 300 400
+
+
+wish()
+{
+   echo "good morning"
+}
+wish
+wish
+wish
+
+
+
+f1()
+{
+   echo "f1 function"
+   f2
+}
+f1
+
+f2()
+{
+  echo "f2 function"
+}
+
+
+
+FUNCTION WITH PARAMETER:
+------------------------
+$1 ---> first paramter value
+$2 ---> second paramter value
+$@ --> all paramter
+$* --> all paramter as a single string seperated with first character
+$# --> the number of paramter
+
+
+demo()
+{
+   echo "first paramter : $1"
+   echo "second paramter : $2"
+   echo "third paramter : $3"
+   echo "total no of paramter : $#"
+   echo "all paramter with @ : $@"
+   echo "all paramter with * : $*"
+   echo "script name : $0"
+}
+
+demo 10 20 30 40 50
+
+
+
+
 ==================================================================================================================
 SED
 ----
@@ -3421,6 +4052,7 @@ sed '/^$/d;G' line.txt
 ^$ --> is used for deleting all blank spaces
 /d is used for display 
 G is used for Gap/Blanks
+
 
 
 
